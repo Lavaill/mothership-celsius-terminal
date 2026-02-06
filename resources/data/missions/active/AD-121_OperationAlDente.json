@@ -1,0 +1,78 @@
+[
+  {
+    "client": "Rossi N",
+    "missionDescription": "VIP requires transport. Heavy equipment and potential industrial espionage to be expected. Biological entity <span class='redacted'>redacted</span> requires special protection, additional incentive provided.",
+    "missionId": "AD-121",
+    "missionName": "Escort vip",
+    "missionPay": {
+      "text": "500",
+      "unit": "cr"
+    },
+    "hazard": 1,
+    "objectives": [
+      {
+        "objective": "Deliver VIP",
+        "pay": "MDT"
+      },
+      {
+        "objective": "Transport equipment",
+        "pay": "MDT"
+      },
+      {
+        "objective": "Protect <span class='redacted'>redacted</span>",
+        "pay": "+500"
+      }
+    ],
+    "params": [
+      {
+        "checkbox": "[ ]",
+        "info": "",
+        "name": "NDA"
+      },
+      {
+        "checkbox": "[ ]",
+        "info": "",
+        "name": "JUMPS"
+      },
+      {
+        "checkbox": "[ ]",
+        "info": "",
+        "name": "SALVAGE"
+      },
+      {
+        "checkbox": "[ ]",
+        "info": "",
+        "name": "EVAC"
+      }
+    ],
+    "warnings": [
+      {
+        "text": "Free Pasta"
+      }
+    ]
+  },
+  {
+    "id": "AD-121",
+    "title": "Operation Al Dente",
+    "summary": "Nonna Rossi is relocating her trattoria. The only available route cuts through a deck with notoriously unstable grav-plating. She wants her ancient-earth sourdough-starter and her machines safe",
+    "location": "Transit Corridor G-4 (Fluctuating Gravity)",
+    "cast": [
+      {
+        "name": "Nonna Rossi",
+        "tagline": "Indomitable Matriarch",
+        "quirk": "Feeds anyone",
+        "want": "To keep the ravioli from overcooking, regardless of physics."
+      },
+      {
+        "name": "The Iron Press",
+        "quirk": "BIFL",
+        "tagline": "2-Ton Antique Machine",
+        "want": "To drift blindly into fragile ship systems."
+      }
+    ],
+    "scenes": [
+      "The gravity plating fails. Nonna tries to catch her ravioli while the press is drifting toward a gas line."
+    ],
+    "reward": "Contact: Nonna Rossi (Infinite Pasta / Stress Relief)"
+  }
+]

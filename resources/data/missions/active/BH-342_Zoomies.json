@@ -1,0 +1,74 @@
+[
+  {
+    "client": "<span class='redacted'>Van Doren</span>",
+    "missionDescription": "Immediate containment required for Biological Asset <span class='redacted'>Princess</span>. Asset has breached confinement. Warning: Asset possesses <span class='redacted'>razor-sharp</span> claws and <span class='redacted'>sneaking</span> capabilities. Previous handler <span class='redacted'>on sick leave</span>.",
+    "missionId": "BH-342",
+    "missionName": "<span class='redacted'>Biological containment</span>",
+    "missionPay": {
+      "text": "4000",
+      "unit": "cr"
+    },
+    "hazard": 1,
+    "objectives": [
+      {
+        "objective": "Capture Asset",
+        "pay": "MDT"
+      },
+      {
+        "objective": "Asset MUST remain unharmed",
+        "pay": "MDT"
+      }
+    ],
+    "params": [
+      {
+        "checkbox": "[x]",
+        "info": "",
+        "name": "NDA"
+      },
+      {
+        "checkbox": "[ ]",
+        "info": "",
+        "name": "JUMPS"
+      },
+      {
+        "checkbox": "[ ]",
+        "info": "",
+        "name": "SALVAGE"
+      },
+      {
+        "checkbox": "[ ]",
+        "info": "",
+        "name": "EVAC"
+      }
+    ],
+    "warnings": [
+      {
+        "text": "Violating NDA == <span class='redacted'>death</span>"
+      }
+    ]
+  },
+  {
+    "id": "BH-342",
+    "title": "Here Kitty, Kitty",
+    "summary": "Director Van Doren's genetically modified pet 'Princess' (a six-legged, chameleon-scaled sloth-cat) has escaped into the Zero-G ventilation shafts after eating a bag of synthetic stimulants.",
+    "location": "Penthouse Ventilation Network (Zero-G)",
+    "cast": [
+      {
+        "name": "Dir. Van Doren",
+        "tagline": "Hysterical VIP",
+        "quirk": "Excellent fashion sense",
+        "want": "Princess returned without a single scratched scale."
+      },
+      {
+        "name": "Princess",
+        "tagline": "Bio-Engineered Pet",
+        "quirk": "Very confused",
+        "want": "The Zoomies."
+      }
+    ],
+    "scenes": [
+      "The 'Stolen Property' isn't data; it's a bag of high-grade 'Zoom' dust. Princess is currently vibrating and bouncing off the walls of the Zero-G shaft at high velocity. The players must catch a hyper-active space cat, while the Director screams over comms every time they bump her."
+    ],
+    "reward": "Favor: Van Doren owes you one. (Good for getting out of jail once)."
+  }
+]

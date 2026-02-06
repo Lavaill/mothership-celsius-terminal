@@ -1,0 +1,69 @@
+[
+  {
+    "client": "Prospero Asset Mgmt.",
+    "missionDescription": "Repossession of Class-4 Heavy Loader. Client in default. Previous recovery team lost due to unsanctioned perimeter denial devices. Bomb squad unavailable due to budget cuts. Salvage rights granted for personal effects",
+    "missionId": "REPO-099",
+    "missionName": "Asset Recovery",
+    "missionPay": {
+      "text": "1000",
+      "unit": "cr"
+    },
+    "hazard": 3,
+    "objectives": [
+      {
+        "objective": "Retrieve Control Chip",
+        "pay": "MDT"
+      },
+      {
+        "objective": "Clear Obstructions",
+        "pay": "+800"
+      },
+      {
+        "objective": "Recover Bodies",
+        "pay": "+200"
+      }
+    ],
+    "params": [
+      {
+        "checkbox": "[ ]",
+        "info": "",
+        "name": "NDA"
+      },
+      {
+        "checkbox": "[ ]",
+        "info": "",
+        "name": "JUMPS"
+      },
+      {
+        "checkbox": "[x]",
+        "info": "prsnl",
+        "name": "SALVAGE"
+      },
+      {
+        "checkbox": "[ ]",
+        "info": "",
+        "name": "EVAC"
+      }
+    ],
+    "warnings": [
+    ]
+  },
+  {
+    "id": "REPO-099",
+    "title": "The High-G Repo",
+    "summary": "A desperate pilot has rigged his docked ship with deadly traps to prevent repo. The players must navigate the booby-trapped corridor. The pilot isn't fighting back; he is floating frozen in the airlock (Suicide).",
+    "location": "Boiler District: Docking Bay 4 (Exterior)",
+    "cast": [
+      {
+        "name": "Loshe",
+        "tagline": "Chill Dockmaster",
+        "quirk": "Cigar, four arms, calm voice",
+        "want": "Keep things running."
+      }
+    ],
+    "scenes": [
+      "The corridor is a spiderweb of monofilament tripwires and improvised shotgun traps. At the end, the airlock is open to the void."
+    ],
+    "reward": "Loot: Custom Auto-Shotgun (Found on pilot), cool revolver (found on recovery team)"
+  }
+]

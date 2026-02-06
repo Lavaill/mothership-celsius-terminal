@@ -1,0 +1,12 @@
+[
+  "tmpl:Sales-n-Dungeons+simple-message",
+  {
+    "id": "ENT-123173-800556",
+    "name": "Welcome",
+    "data": {
+      "message": "Success",
+      "title": "My Message"
+    }
+  },
+  {}
+]
