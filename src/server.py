@@ -17,7 +17,8 @@ class GameRequestHandler(BaseHTTPRequestHandler):
 
         if parsed.path == '/start':
             interval = params.get('interval', [None])[0]
-            success = worker.start(interval)
+            api_url = params.get('api_url', [None])[0]
+            success = worker.start(interval, api_url)
             response_msg = "Timer started" if success else "Timer already running"
 
         elif parsed.path == '/stop':
@@ -26,7 +27,7 @@ class GameRequestHandler(BaseHTTPRequestHandler):
 
         elif parsed.path == '/status':
             state = "Running" if worker.is_running else "Stopped"
-            response_msg = f"Status: {state} | Interval: {worker.interval}"
+            response_msg = f"Status: {state} | Interval: {worker.interval}m"
             
         elif parsed.path == '/print/contracts':
             # API endpoint to print all contracts
@@ -44,6 +45,23 @@ class GameRequestHandler(BaseHTTPRequestHandler):
             else:
                 status_code = 400
                 response_msg = "Missing mission ID"
+
+        elif parsed.path.startswith('/print/mission/'):
+            # API endpoint to print a specific mission
+            # Example: GET /print/mission/BH-342
+            mission_id = parsed.path.split('/')[-1]
+            if mission_id:
+                success = printer_service.print_mission(mission_id)
+                response_msg = f"Printing mission {mission_id} initiated" if success else f"Failed to find or print mission {mission_id}"
+            else:
+                status_code = 400
+                response_msg = "Missing mission ID"
+
+        elif parsed.path == '/print/oxygen':
+            # API endpoint to print an oxygen bill
+            # Example: GET /print/oxygen
+            success = printer_service.print_oxygen_bill()
+            response_msg = "Printing oxygen bill initiated" if success else "Failed to initiate printing"
 
         else:
             status_code = 404

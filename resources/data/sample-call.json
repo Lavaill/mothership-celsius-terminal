@@ -1,11 +1,11 @@
 [
-  "tmpl:Sales-n-Dungeons+simple-message",
+  "tmpl:tatourmi+oxygen-bill",
   {
-    "id": "ENT-123173-800556",
-    "name": "Welcome",
+    "id": "O2-01",
+    "name": "OxygenTax",
     "data": {
-      "message": "Success",
-      "title": "My Message"
+      "price": "100",
+      "quote": "Thank you for choosing life"
     }
   },
   {}

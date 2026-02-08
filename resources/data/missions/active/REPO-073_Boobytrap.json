@@ -1,0 +1,92 @@
+{"id": "REPO-073",
+  "entries": [
+    {
+      "type": "contract",
+      "data": {
+        "client": "Prspr Asset Mgmt.",
+        "missionDescription": "Repossession of Class-4 Heavy Loader. Client in default. Previous recovery team lost due to unsanctioned perimeter denial devices. Bomb squad unavailable due to budget cuts. Salvage rights granted for personal effects",
+        "missionId": "REPO-073",
+        "missionName": "Asset Recovery",
+        "missionPay": {
+          "text": "1000",
+          "unit": "cr"
+        },
+        "hazard": 3,
+        "objectives": [
+          {
+            "objective": "Retrieve Control Chip",
+            "pay": "MDT"
+          },
+          {
+            "objective": "Clear Obstructions",
+            "pay": "+800"
+          },
+          {
+            "objective": "Recover Bodies",
+            "pay": "+200"
+          }
+        ],
+        "params": [
+          {
+            "checkbox": "[ ]",
+            "info": "",
+            "name": "NDA"
+          },
+          {
+            "checkbox": "[ ]",
+            "info": "",
+            "name": "JUMPS"
+          },
+          {
+            "checkbox": "[x]",
+            "info": "prsnl",
+            "name": "SALVAGE"
+          },
+          {
+            "checkbox": "[ ]",
+            "info": "",
+            "name": "EVAC"
+          }
+        ],
+        "warnings": [
+        ]
+      }
+    },
+    {
+      "type": "mission",
+      "data": {
+        "id": "REPO-073",
+        "title": "Shotgun Repo",
+        "summary": "A pilot has rigged his docked ship with deadly traps to prevent repo. Smuggled oxygen for I.K. The pilot isn't fighting back; he is floating frozen in the driver's seat (Suicide, shotgun, messy).",
+        "location": "Dock 4, next to Dry Dock",
+        "locationRef": "APOF-11",
+        "cast": [
+          {
+            "name": "Loshe",
+            "tagline": "Chill Dockmaster",
+            "quirk": "Cigar, four arms, calm voice",
+            "want": "Keep things running."
+          }
+        ],
+        "scenes": [
+          {
+            "desc": "A spiderweb of tripwires and improvised shotgun-shell/02-tanks traps. A corpse is floating in the airlock, gun in hand. How do you proceed?"
+          },
+          {
+            "desc": "Door to the cabin opens: The headless, frozen corpse of the pilot, shotgun on lap. Note: 'I just wanted to help.'. Last ship transmission to 'I.K'"
+          }
+        ],
+        "rewards": [
+          {
+            "type": "Weapon",
+            "desc": "Antique hunting shotgun. 2d10 close, 1d10 far. 2 shots, can doublefire for x2 dmg."
+          },
+          {
+            "type": "Weapon",
+            "desc": "Brand new revolver. 1d10+1 Never used. Which flashy attachment did this idiot strap on?"
+          }
+        ]
+      }
+    }
+  ]
+}
