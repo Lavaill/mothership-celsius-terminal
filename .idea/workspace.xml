@@ -5,20 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c7dab7c-0b60-44f4-9230-71ff9ff2ed0d" name="Changes" comment="Initial functional commit">
-      <change afterPath="$PROJECT_DIR$/resources/data/missions/active/REPO-073_Boobytrap.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/data/other/OxygenCall.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/data/random-generators/OxygenFortunes.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.aiassistant/rules/gemini-rules.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tui.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/missions/active/AD-121_OperationAlDente.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/missions/active/AD-121_OperationAlDente.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/missions/active/BH-342_Zoomies.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/missions/active/BH-342_Zoomies.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/missions/active/REPO-099_Boobytrap.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/sample-call.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/sample-call.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/cli.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/printer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/printer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,29 +40,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.printer.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.main.executor": "Run",
+    "Python.printer.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "ai.playground.ignore.import.keys.banner.in.settings": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "feature/textual-support",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "ml.llm.LLMAiRulesSettingsProvider",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Workspace\Python\MothershipCli\src" />
@@ -152,7 +145,7 @@
       <workItem from="1770220241676" duration="367000" />
       <workItem from="1770411260294" duration="11808000" />
       <workItem from="1770552618880" duration="13519000" />
-      <workItem from="1770577653195" duration="8704000" />
+      <workItem from="1770577653195" duration="16623000" />
     </task>
     <task id="LOCAL-00001" summary="Initial functional commit">
       <option name="closed" value="true" />

@@ -58,7 +58,7 @@ class Printer:
         """
         fortunes = self.parser.read_json_file(self.fortunes_path)
         if not fortunes or not isinstance(fortunes, list):
-            logger.log("Error: Could not read oxygen fortunes.")
+            logger.error("Error: Could not read oxygen fortunes.")
             return False
 
         quote = random.choice(fortunes)
@@ -80,25 +80,26 @@ class Printer:
             data = json.dumps(payload).encode('utf-8')
             req = urllib.request.Request(self.printer_url, data=data, headers={'Content-Type': 'application/json'})
             
-            with urllib.request.urlopen(req) as response:
+            logger.info("Sending oxygen bill to printer...")
+            with urllib.request.urlopen(req, timeout=10) as response:
                 if response.getcode() == 200:
-                    logger.log("Successfully sent oxygen bill to printer.")
+                    logger.info("Successfully sent oxygen bill to printer.")
                     return True
                 else:
-                    logger.log(f"Failed to print oxygen bill. Status: {response.getcode()}")
+                    logger.error(f"Failed to print oxygen bill. Status: {response.getcode()}")
                     return False
         except urllib.error.HTTPError as e:
-            logger.log(f"Failed to print oxygen bill. Status: {e.code}, Response: {e.read().decode('utf-8')}")
+            logger.error(f"Failed to print oxygen bill. Status: {e.code}, Response: {e.read().decode('utf-8')}")
             return False
         except Exception as e:
-            logger.log(f"Connection error printing oxygen bill: {e}")
+            logger.error(f"Connection error printing oxygen bill: {e}")
             return False
 
     def _print_entry(self, mission_id, entry_type):
         full_missions_path = os.path.join(self.parser.resources_dir, self.missions_path)
         
         if not os.path.exists(full_missions_path):
-            logger.log(f"Error: Missions directory not found at {full_missions_path}")
+            logger.error(f"Error: Missions directory not found at {full_missions_path}")
             return False
 
         # Iterate through all files to find the one with the matching ID
@@ -115,7 +116,7 @@ class Printer:
                 break
         
         if not target_file:
-            logger.log(f"Error: No mission file found for ID {mission_id}")
+            logger.error(f"Error: No mission file found for ID {mission_id}")
             return False
 
         return self._send_print_request(target_file, entry_type)
@@ -124,7 +125,7 @@ class Printer:
         full_missions_path = os.path.join(self.parser.resources_dir, self.missions_path)
         
         if not os.path.exists(full_missions_path):
-            logger.log(f"Error: Missions directory not found at {full_missions_path}")
+            logger.error(f"Error: Missions directory not found at {full_missions_path}")
             return False
 
         success_count = 0
@@ -134,7 +135,7 @@ class Printer:
             if self._send_print_request(os.path.join(self.missions_path, filename), entry_type):
                 success_count += 1
         
-        logger.log(f"Sent {success_count}/{len(files)} {entry_type}s to printer.")
+        logger.info(f"Sent {success_count}/{len(files)} {entry_type}s to printer.")
         return success_count > 0
 
     def _send_print_request(self, relative_file_path, entry_type):
@@ -151,7 +152,7 @@ class Printer:
                 break
         
         if not target_entry:
-            logger.log(f"Error: No {entry_type} data found in {relative_file_path}")
+            logger.error(f"Error: No {entry_type} data found in {relative_file_path}")
             return False
 
         # Construct the payload based on entry type
@@ -176,25 +177,37 @@ class Printer:
                 {}
             ]
         else:
-            logger.log(f"Error: Unknown entry type {entry_type}")
+            logger.error(f"Error: Unknown entry type {entry_type}")
             return False
 
         try:
             data = json.dumps(payload).encode('utf-8')
             req = urllib.request.Request(self.printer_url, data=data, headers={'Content-Type': 'application/json'})
             
-            with urllib.request.urlopen(req) as response:
+            logger.debug(f"Sending {entry_type} from {relative_file_path} to printer...")
+            logger.info(f"Sending {entry_type} to printer...")
+            
+            with urllib.request.urlopen(req, timeout=10) as response:
                 if response.getcode() == 200:
-                    logger.log(f"Successfully sent {entry_type} from {relative_file_path} to printer.")
+                    logger.debug(f"Successfully sent {entry_type} from {relative_file_path} to printer.")
+                    logger.info(f"Successfully sent {entry_type} to printer.")
                     return True
                 else:
-                    logger.log(f"Failed to print {entry_type} from {relative_file_path}. Status: {response.getcode()}")
+                    logger.debug(f"Failed to print {entry_type} from {relative_file_path}. Status: {response.getcode()}")
+                    logger.error(f"Failed to print {entry_type}. Status: {response.getcode()}")
                     return False
         except urllib.error.HTTPError as e:
-            logger.log(f"Failed to print {entry_type} from {relative_file_path}. Status: {e.code}, Response: {e.read().decode('utf-8')}")
+            logger.debug(f"Failed to print {entry_type} from {relative_file_path}. Status: {e.code}, Response: {e.read().decode('utf-8')}")
+            logger.error(f"Failed to print {entry_type}. Status: {e.code}")
             return False
         except Exception as e:
-            logger.log(f"Connection error printing {relative_file_path}: {e}")
+            logger.error(f"Connection error printing {relative_file_path}: {e}")
             return False
 
-printer_service = Printer()
+logger.info("Initializing Printer Service...")
+try:
+    printer_service = Printer()
+    logger.info("Printer Service initialized.")
+except Exception as e:
+    logger.error("Failed to initialize Printer Service", exc_info=True)
+    raise e
