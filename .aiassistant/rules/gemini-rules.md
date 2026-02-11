@@ -14,7 +14,7 @@ All UI elements must adhere to the "Dystopian Terminal" philosophy:
 
 ### Philosophy: "Cassette Futurism." 
 - Think CRT monitors, physical switches, and bureaucratic brutality.
-
+- Themes: NEVER mention Crypto (NEVER), avoid mentioning the internet. You are working in a Jack-in-only interface. No uplinks.
 
 ### Colors: High contrast.
 - Backgrounds: Deep blacks (#050505), dark greys, or desaturated dark blues. 
@@ -22,7 +22,7 @@ All UI elements must adhere to the "Dystopian Terminal" philosophy:
 
 ### Geometry:
 - Strictly **0px border-radius**. 
-- Borders should be `solid`, `heavy`, `double`, or `dashed`. Avoid `round` borders.
+- Borders should be `solid`, `heavy`, `double`, or `dashed`.
 - Use ASCII/Block characters for graphical elements where possible.
 
 ## 2. TUI & TCSS ARCHITECTURE (Textual)

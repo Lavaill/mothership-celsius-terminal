@@ -2,6 +2,7 @@ import threading
 import time
 from src.utils import logger
 from src.printer import printer_service
+from src.interface import Interface
 
 class ApiWorker:
     def __init__(self):
@@ -18,40 +19,56 @@ class ApiWorker:
         if not self.is_running or self.total_seconds == 0:
             return 0.0
         elapsed = time.time() - self.start_time
+        # Modulo to handle the loop nature
+        # Actually, the loop resets start_time every iteration.
+        # But we need to handle the case where we are waiting.
         return min(elapsed / self.total_seconds, 1.0)
 
     def _run_loop(self):
-        logger.info(f"Timer started. Interval: {self.interval}s")
+        logger.log(f"Timer started. Interval: {self.interval}m")
         self.total_seconds = self.interval * 60
-        self.is_running = True # Set True LAST to prevent race condition in progress calculation
+        self.is_running = True
 
         while not self._stop_event.is_set():
             self.start_time = time.time()
-            # --- SIMULATE API CALL ---
+            
+            # Granular wait to allow for progress tracking and faster stopping
+            # We wait BEFORE the action? Or AFTER?
+            # Usually a timer waits then acts.
+            # The previous code acted then waited.
+            # "Make code that sends this post request for every single file... if receiving the command print contracts"
+            # "Our timer makes an API call every X minutes."
+            
+            # Let's wait first, then act. Or act then wait?
+            # "calls the oxygen-bill API every tick"
+            # Usually implies wait -> act -> wait -> act.
+            # But let's stick to the previous logic: Act (maybe initially?) then wait.
+            # The previous logic was: Act, then wait.
+            
             try:
                 # Call the oxygen bill printer service
                 printer_service.print_oxygen_bill()
             except Exception as e:
-                logger.error(f"API Call: Failed", exc_info=True)
+                logger.log(f"API Call: Failed - {e}")
 
-            # Granular wait to allow for progress tracking and faster stopping
+            # Wait loop
             end_wait = time.time() + self.total_seconds
             while time.time() < end_wait and not self._stop_event.is_set():
-                time.sleep(1)
+                time.sleep(0.5) # Update frequency
 
         self.is_running = False
-        logger.info("Timer loop stopped.")
+        logger.log("Timer loop stopped.")
 
     def start(self, interval=None, api_url=None):
         if self.is_running:
-            logger.warning("Timer is already running.")
+            logger.log("Warning: Timer is already running.")
             return False
 
         if interval:
             try:
                 self.interval = int(interval)
             except ValueError:
-                logger.error(f"Invalid interval format: {interval}")
+                logger.log(f"Invalid interval format: {interval}")
                 return False
             
         if api_url:
@@ -64,15 +81,12 @@ class ApiWorker:
 
     def stop(self):
         if not self.is_running:
-            logger.warning("Timer is not running.")
+            logger.log("Warning: Timer is not running.")
             return False
 
         self._stop_event.set()
-        # We don't join() here to avoid blocking the HTTP server response
         return True
 
 
 # Global instance to be shared between CLI and HTTP Server
-logger.info("Initializing API Worker...")
 worker = ApiWorker()
-logger.info("API Worker initialized.")

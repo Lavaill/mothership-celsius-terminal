@@ -50,7 +50,7 @@ class LoggerWrapper:
 
         # 2. TUI Handler (User-facing)
         self.tui_handler = TuiHandler()
-        # Simple format for the UI
+        # Simple format for the UI - REMOVED COLORS
         tui_formatter = logging.Formatter('%(asctime)s - %(message)s', datefmt='%H:%M:%S')
         self.tui_handler.setFormatter(tui_formatter)
         # Only show INFO and above in the TUI (hides DEBUG logs with filenames)
@@ -76,6 +76,9 @@ class LoggerWrapper:
 
     def debug(self, message):
         self._logger.debug(message)
+
+    def critical(self, message, exc_info=True):
+        self._logger.critical(message, exc_info=exc_info)
 
 logger = LoggerWrapper()
 
