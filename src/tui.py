@@ -12,108 +12,10 @@ import time
 from src.app import worker
 from src.printer import printer_service
 from src.utils import logger
+from src.theme import THEMES, TYPE_DELAY, LINE_DELAY
 
 logger.info("TUI: Module loading...")
 
-# --- CONSTANTS ---
-TYPE_DELAY = 0.01
-LINE_DELAY = 0.2
-
-# --- THEMES ---
-THEMES = {
-    "mothership": {
-        "primary": "#FF9500",
-        "secondary": "#8A5200",
-        "header": "MOTHERSHIP UPLINK // TERMINAL ZERO",
-        "logo": """
-   __  __ 
-  |  \/  |
-  | |\/| |
-  |_|  |_|
-    """,
-        "startup": [
-            "Initializing Kernel...",
-            "Loading Modules: [OXYGEN BILLING, LEDGERS, CONTRACT]... OK",
-            "Mounting File System... OK",
-            "Establishing Uplink... SUCCESS",
-            "Welcome, User."
-        ]
-    },
-    "prospero": {
-        "primary": "#FF1493",
-        "secondary": "#8B0A50",
-        "header": "PROSPERO STATION // OUTLAW NEXUS",
-        "logo": """
-   ___ 
-  | _ \\
-  |  _/
-  |_|  
-    """,
-        "startup": [
-            "Bypassing Security Protocols...",
-            "Spoofing ID Signature... [PROSPERO_GUEST]",
-            "Connecting to Darknet Node... SUCCESS",
-            "WARNING: UNSECURED CONNECTION",
-            "Welcome to the Nexus."
-        ]
-    },
-    "helios": {
-        "primary": "#FFFFFF",
-        "secondary": "#808080",
-        "header": "HELIOS HEALTH // BIOMETRIC LINK",
-        "logo": """
-   _  _ 
-  | || |
-  | __ |
-  |_||_|
-    """,
-        "startup": [
-            "Scanning Biometrics...",
-            "Heart Rate: 72 BPM. Stress Level: 12%.",
-            "Authenticating Employee ID...",
-            "Access Granted: Level 4 Clearance.",
-            "Helios Health: We Care Because You Pay."
-        ]
-    },
-    "astra": {
-        "primary": "#33FF00",
-        "secondary": "#1A8000",
-        "header": "ASTRA HEAVY IND // FACTORY GATE",
-        "logo": """
-    __  
-   /  \\ 
-  | /\\ |
-  |_||_|
-    """,
-        "startup": [
-            "Booting Industrial Controller...",
-            "Checking Safety Interlocks... DISABLED",
-            "Connecting to Factory Floor...",
-            "Production Efficiency: 94%.",
-            "Astra Heavy Industries: Building Tomorrow."
-        ]
-    },
-    "parallax": {
-        "primary": "#9D00FF",
-        "secondary": "#4B0082",
-        "header": "PARALLAX SYSTEMS // FTL NODE",
-        "logo": """
-   ___ 
-  | _ \\
-  |  _/
-  |_|  
-    """,
-        "startup": [
-            "Aligning Phase Arrays...",
-            "Calculating Jump Coordinates...",
-            "Syncing with FTL Beacon...",
-            "Reality Anchor: STABLE.",
-            "Parallax Systems: Everywhere at Once."
-        ]
-    }
-}
-
-logger.info(f"TUI: Loaded {len(THEMES)} themes.")
 # --- Generate Theme CSS ---
 THEME_CSS = ""
 for name, data in THEMES.items():
@@ -159,7 +61,7 @@ def get_completions(value: str) -> list[str]:
     # Do NOT strip the value, as trailing spaces are significant for parsing arguments
     value_lower = value.lower()
     
-    commands = ['start', 'stop', 'status', 'print', 'check', 'theme', 'exit']
+    commands = ['start', 'stop', 'status', 'print', 'check', 'theme', 'wound', 'exit']
     
     # Level 1: Top-level commands
     # If there are no spaces, we are still typing the command
@@ -196,6 +98,19 @@ def get_completions(value: str) -> list[str]:
             prefix = parts[1]
             theme_names = list(THEMES.keys())
             return [f"theme {t}" for t in theme_names if t.startswith(prefix)]
+
+    # Level 2: Wound Subcommands
+    if value_lower.startswith('wound'):
+        parts = value_lower.split(' ')
+        if len(parts) == 2:
+            prefix = parts[1]
+            wound_types = printer_service.get_wound_types()
+            return [f"wound {w}" for w in wound_types if w.lower().startswith(prefix)]
+        if len(parts) == 3:
+            # Suggest numbers 1-10
+            prefix = parts[2]
+            numbers = [str(i) for i in range(1, 11)]
+            return [f"wound {parts[1]} {n}" for n in numbers if n.startswith(prefix)]
 
     return []
 
@@ -381,9 +296,9 @@ class MothershipApp(App):
                         
                         # Connection Widget
                         with Vertical(classes="widget-box"):
-                            yield Label("NETWORK", classes="label-title")
-                            yield Static("UPLINK: [bold]SECURE[/]")
-                            yield Static("PING:   12ms")
+                            yield Label("PRINTER MODULE", classes="label-title")
+                            yield Static("CONNECTION: [bold]SECURE[/]")
+                            yield Static("TYPE:   JACK")
                             yield RichLog(id="network-log", classes="status-log", highlight=False, markup=True)
             logger.info("TUI: compose finished successfully")
         except Exception as e:
@@ -396,6 +311,7 @@ class MothershipApp(App):
             self.screen.add_class(self.active_theme)
             self.query_one("#game_log").can_focus = False
             logger.set_callback(self.write_log_threadsafe)
+            logger.set_network_callback(self.write_network_log_threadsafe)
             self.run_startup_sequence()
             self.query_one("#command_input").focus()
             self.set_interval(0.2, self.update_status_panel) # Faster refresh for wave animation
@@ -442,6 +358,12 @@ class MothershipApp(App):
             clean_msg = message.split(" - ")[-1] if " - " in message else message
             self.query_one("#network-log").write(f"> {clean_msg}")
 
+    def write_network_log_threadsafe(self, message: str) -> None:
+        self.call_from_thread(self._update_network_log_ui, message)
+
+    def _update_network_log_ui(self, message: str) -> None:
+        self.query_one("#network-log").write(f"> {message}")
+
     def write_to_console(self, text: str, indent: bool = True) -> None:
         """Writes to the main history log and scrolls down."""
         if indent:
@@ -476,46 +398,18 @@ class MothershipApp(App):
         sec_color = self.theme_data["secondary"]
         self.write_to_console(f"[{sec_color}]{options_str}[/{sec_color}]\n")
 
-    def get_complex_timer_ascii(self, percent: float) -> str:
+    def get_simple_bar_ascii(self, percent: float) -> str:
         """
-        Generates a 'Reactor Core' style ASCII art with a wave animation.
+        Generates a simple filling bar animation.
         """
         p = max(0.0, min(1.0, percent))
+        width = 20
+        filled = int(p * width)
         
-        # Wave Animation Frames
-        wave_chars = ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█", "▇", "▆", "▅", "▄", "▃", "▁"]
+        # Simple bar characters
+        bar = "█" * filled + "░" * (width - filled)
         
-        if worker.is_running:
-            # Calculate wave position based on time
-            t = time.time() * 10  # Speed of wave
-            wave_idx = int(t) % len(wave_chars)
-            wave_char = wave_chars[wave_idx]
-        else:
-            wave_char = " "
-
-        # 8 levels of charge for the core
-        levels = 8
-        filled = int(p * levels)
-        
-        # Construct the tower
-        art = []
-        art.append(f"  /==[{wave_char}]==\\  ")
-        
-        for i in range(levels):
-            level_idx = levels - 1 - i
-            if level_idx < filled:
-                # Filled segment
-                bar = "██████"
-                art.append(f"  |{bar}|  ")
-            else:
-                # Empty segment
-                bar = "......"
-                art.append(f"  |{bar}|  ")
-        
-        art.append("  \\======/  ")
-        art.append(f"   {int(p*100):3d}%   ")
-        
-        return "\n".join(art)
+        return f"\n\n[{bar}]\n   {int(p*100)}%"
 
     def update_status_panel(self) -> None:
         try:
@@ -535,8 +429,8 @@ class MothershipApp(App):
             self.query_one("#timer-state-text").update(f"STATE: {state_display}")
             self.query_one("#timer-interval-text").update(f"INT: {worker.interval}m")
 
-            # Update Visual
-            art = self.get_complex_timer_ascii(worker.progress)
+            # Update Visual - Using Simple Bar
+            art = self.get_simple_bar_ascii(worker.progress)
             self.query_one("#timer-visual").update(art)
 
         except Exception as e:
@@ -590,11 +484,15 @@ class MothershipApp(App):
                 interval = args[0] if len(args) > 0 else None
                 if worker.start(interval):
                     self.write_to_console(f"[{sec_color}]Timer started (Interval: {worker.interval}m).[/{sec_color}]\n")
+                    # FIX: Call _update_network_log_ui directly since we are in the main thread
+                    self._update_network_log_ui("LOCAL: TIMER START")
                 else:
                     self.write_to_console(f"[bold red]ERROR: Timer already active or invalid interval.[/]\n")
             elif cmd == "stop":
                 if worker.stop():
                     self.write_to_console(f"[{sec_color}]Timer stopped.[/{sec_color}]\n")
+                    # FIX: Call _update_network_log_ui directly since we are in the main thread
+                    self._update_network_log_ui("LOCAL: TIMER STOP")
                 else:
                     self.write_to_console(f"[{sec_color}]Timer is not currently active.[/{sec_color}]\n")
             elif cmd == "status":
@@ -613,8 +511,10 @@ class MothershipApp(App):
                         self.write_to_console(f"[{sec_color}]Unknown theme: {new_theme}[/{sec_color}]\n")
                 else:
                     self.write_to_console(f"[{sec_color}]Usage: theme [mothership|prospero|helios|astra|parallax][/{sec_color}]\n")
+            elif cmd == "wound":
+                await self.handle_wound_command(args)
             else:
-                self.write_to_console(f"[{sec_color}]Unknown command. Try 'start', 'print', 'check', 'theme', or 'exit'.[/{sec_color}]\n")
+                self.write_to_console(f"[{sec_color}]Unknown command. Try 'start', 'print', 'check', 'theme', 'wound', or 'exit'.[/{sec_color}]\n")
         except Exception as e:
             logger.error(f"Command failed: {command}", exc_info=True)
             self.write_to_console(f"[bold red]ERROR: {e}[/]\n")
@@ -627,6 +527,18 @@ class MothershipApp(App):
         sub = args[0].upper() # Keep upper for backend logic if needed, or convert as required
         self.write_to_console(f"[{sec_color}]Print request for {sub.lower()} queued.[/{sec_color}]\n")
         self.run_print_task(sub, args)
+
+    async def handle_wound_command(self, args):
+        sec_color = self.theme_data["secondary"]
+        if not args:
+            self.write_to_console(f"[{sec_color}]Usage: wound [type] [optional: number][/{sec_color}]\n")
+            return
+        
+        wound_type = args[0]
+        wound_number = args[1] if len(args) > 1 else None
+        
+        self.write_to_console(f"[{sec_color}]Processing wound report...[/{sec_color}]\n")
+        self.run_wound_task(wound_type, wound_number)
 
     @work(exclusive=True, thread=True)
     def run_print_task(self, sub, args):
@@ -646,3 +558,14 @@ class MothershipApp(App):
                 self.call_from_thread(self.write_to_console, f"[{sec_color}]Invalid print parameters.[/{sec_color}]\n")
         except Exception as e:
             logger.error(f"Print task failed: {sub}", exc_info=True)
+
+    @work(exclusive=True, thread=True)
+    def run_wound_task(self, wound_type, wound_number):
+        sec_color = self.theme_data["secondary"]
+        try:
+            if printer_service.print_wound(wound_type, wound_number):
+                self.call_from_thread(self.write_to_console, f"[{sec_color}]Wound report printed successfully.[/{sec_color}]\n")
+            else:
+                self.call_from_thread(self.write_to_console, f"[{sec_color}]Failed to print wound report. Check logs.[/{sec_color}]\n")
+        except Exception as e:
+            logger.error(f"Wound task failed", exc_info=True)

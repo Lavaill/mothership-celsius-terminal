@@ -1,0 +1,81 @@
+{
+    "wound-severity": {
+        "1": "Flesh Wound",
+        "2": "Minor Injury",
+        "3": "Minor Injury",
+        "4": "Minor Injury",
+        "5": "Minor Injury",
+        "6": "Major Injury",
+        "7": "Major Injury",
+        "8": "Lethal Injury<br>DEATH SAVE in 1d10 rounds",
+        "9": "Lethal Injury<br>DEATH SAVE in 1d10 rounds",
+        "10": "Fatal Injury"
+    },
+    "wound-tables": [
+        {
+            "type": "bleeding",
+            "1": "Drop held item",
+            "2": "Lots of blood. Those Close gain 1 Stress",
+            "3": "Blood in eyes. [-] until wiped clean",
+            "4": "Laceration. Bleeding +1",
+            "5": "Major cut. Bleeding +2",
+            "6": "Fingers/toes severed. Bleeding +3",
+            "7": "Hand/foot severed. Bleeding +4",
+            "8": "Limb severed. Bleeding +5",
+            "9": "Major artery cut. Bleeding +6",
+            "10": "Throat slit or heart pierced.DEATH SAVE"
+        },
+        {
+            "type": "gunshot",
+            "1": "Grazed. Knocked down",
+            "2": "Bleeding +1",
+            "3": "Broken rib",
+            "4": "Fractured extremity",
+            "5": "Internal bleeding. Bleeding +2",
+            "6": "Lodged bullet. Surgery required",
+            "7": "Gunshot wound to the neck",
+            "8": "Major blood loss. Bleeding +4",
+            "9": "Sucking chest wound. Bleeding +5",
+            "10": "Headshot. DEATH SAVE"
+        },
+        {
+            "type": "blunt",
+            "1": "Knocked down",
+            "2": "Winded. [-] until you catch your breath",
+            "3": "Sprained Ankle. [-] on Speed Checks",
+            "4": "Concussion. [-] on mental tasks",
+            "5": "Leg or foot broken. [-] on Speed Checks",
+            "6": "Arm or hand broken. [-] manual tasks",
+            "7": "Snapped collarbone. [-] on Strength Checks",
+            "8": "Back broken. [-] on all rolls",
+            "9": "Skull fracture. [-] on all rolls",
+            "10": "Spine or neck broken. DEATH SAVE"
+        },
+        {
+            "type": "gore/massive",
+            "1": "Vomit. [-] on next action.",
+            "2": "Awesome scar. +1min Stress",
+            "3": "Digit mangled",
+            "4": "Eyes gouged out",
+            "5": "Ripped off flesh. -1d10 Strength",
+            "6": "Paralyzed waist down",
+            "7": "Limb severed. Bleeding +5",
+            "8": "Impaled. Bleeding +6",
+            "9": "Guts spooled on floor. Bleeding +7",
+            "10": "Head explodes. No save. YOU ARE DEAD"
+        },
+        {
+            "type": "fire/explosive",
+            "1": "Hair burnt. 1d5 Stress",
+            "2": "Awesome scar. +1min Stress",
+            "3": "Singed. [-] on next action",
+            "4": "Shrapnel/large burn",
+            "5": "Extensive burns. -1d10 Strength",
+            "6": "Major Burn. -2d10 Body Save",
+            "7": "Skin grafts required. -2d10 Body Save",
+            "8": "Limb on fire. 2d10 Damage per round",
+            "9": "Body on fire. 3d10 Damage per round",
+            "10": "Engulfed in fiery explosion. DEATH SAVE"
+        }
+    ]
+}

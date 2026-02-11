@@ -8,7 +8,7 @@ class ApiWorker:
     def __init__(self):
         self._stop_event = threading.Event()
         self._thread = None
-        self.interval = 5
+        self.interval = 20 # Default to 20 minutes
         self.is_running = False
         self.api_url = None # Placeholder if we want to make the URL configurable later
         self.start_time = 0

@@ -57,8 +57,20 @@ class LoggerWrapper:
         self.tui_handler.setLevel(logging.INFO)
         self._logger.addHandler(self.tui_handler)
 
+        # 3. Network Widget Callback
+        self.network_callback = None
+
     def set_callback(self, callback):
         self.tui_handler.set_callback(callback)
+
+    def set_network_callback(self, callback):
+        """Set a separate callback for the network status widget."""
+        self.network_callback = callback
+
+    def network_msg(self, message):
+        """Send a message specifically to the network widget."""
+        if self.network_callback:
+            self.network_callback(message)
 
     # --- Proxy Methods ---
     def log(self, message):

@@ -1,6 +1,8 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 import json
+import os
+import signal
 
 from src.app import worker
 from src.utils import logger
@@ -27,8 +29,30 @@ class GameRequestHandler(BaseHTTPRequestHandler):
 
         elif parsed.path == '/status':
             state = "Running" if worker.is_running else "Stopped"
-            response_msg = f"Status: {state} | Interval: {worker.interval}m"
+            # Return JSON for status to be more useful for API consumers
+            status_data = {
+                "state": state,
+                "interval": worker.interval,
+                "progress": round(worker.progress, 2)
+            }
+            response_msg = json.dumps(status_data)
+            self.send_header('Content-type', 'application/json')
+
+        elif parsed.path == '/exit':
+            response_msg = "Shutting down system..."
+            # We need to send the response before killing the process
+            self.send_response(200)
+            self.send_header('Content-type', 'text/plain')
+            self.end_headers()
+            self.wfile.write(response_msg.encode())
             
+            # Shutdown logic
+            worker.stop()
+            logger.info("System exit requested via API.")
+            # Send SIGINT to the main process to trigger a clean exit
+            os.kill(os.getpid(), signal.SIGINT)
+            return
+
         elif parsed.path == '/print/contracts':
             # API endpoint to print all contracts
             # Example: GET /print/contracts
@@ -62,6 +86,19 @@ class GameRequestHandler(BaseHTTPRequestHandler):
             # Example: GET /print/oxygen
             success = printer_service.print_oxygen_bill()
             response_msg = "Printing oxygen bill initiated" if success else "Failed to initiate printing"
+
+        elif parsed.path.startswith('/print/wound/'):
+            # API endpoint to print a wound
+            # Example: GET /print/wound/BLEEDING?number=5
+            wound_type = parsed.path.split('/')[-1]
+            wound_number = params.get('number', [None])[0]
+            
+            if wound_type:
+                success = printer_service.print_wound(wound_type, wound_number)
+                response_msg = f"Printing wound {wound_type} initiated" if success else f"Failed to print wound {wound_type}"
+            else:
+                status_code = 400
+                response_msg = "Missing wound type"
 
         else:
             status_code = 404

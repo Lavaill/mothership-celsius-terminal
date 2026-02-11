@@ -1,0 +1,100 @@
+{"id": "CF-201",
+  "entries": [
+    {
+      "type": "contract",
+      "data": {
+        "client": "Astra",
+        "missionDescription": "Received S.O.S from Tinea Weather Station, requested immediate evacuation. T-7.30h until station lost. Astra contact confirmed objective-based payments, see priorities below. Note: The Operator is NOT HUMAN, they are a genetically modified member of an endangered species, retrieval is your top priority.",
+        "missionId": "CF-201",
+        "missionName": "EMERGENCY EVACUATION",
+        "missionPay": {
+          "text": "0",
+          "unit": "cr"
+        },
+        "hazard": 8,
+        "objectives": [
+          {
+            "objective": "Extract Operator Alive and Intact",
+            "pay": "+80k"
+          },
+          {
+            "objective": "Extract Weather Data",
+            "pay": "+45k"
+          },
+          {
+            "objective": "Extract Dr Lars Antal",
+            "pay": "+5k"
+          }
+        ],
+        "params": [
+          {
+            "checkbox": "[x]",
+            "info": "",
+            "name": "NDA"
+          },
+          {
+            "checkbox": "[ ]",
+            "info": "",
+            "name": "JUMPS"
+          },
+          {
+            "checkbox": "[x]",
+            "info": "",
+            "name": "SALVAGE"
+          },
+          {
+            "checkbox": "[ ]",
+            "info": "",
+            "name": "TRANSPORT"
+          }
+        ],
+        "warnings": [
+          {
+            "text": "URGENT URGENT URGENT"
+          }
+        ]
+      }
+    },
+    {
+      "type": "mission",
+      "data": {
+        "id": "CF-201",
+        "title": "Circle the Flame",
+        "summary": "50 min + 3h20 flight + 40m dock est. Normal = 18 exploration turns. Roll 1d5 every Exploration Turn. 1 and 2 = BOOPSIE. 9 = ORBITAL DECAY - 10 minutes. 10 = Breach. One module is depressurized. Roll 1d8 - 20 min",
+        "location": "Tinea Weather Station",
+        "locationRef": "",
+        "cast": [
+          {
+            "name": "Boopsie<br>[ ][ ][ ]",
+            "tagline": "I50 1d10+5dmg",
+            "quirk": "Tailored Suit, Name Tag",
+            "want": "Plush and Calm"
+          }
+        ],
+        "scenes": [
+          {
+            "desc": "50(30)m board + 3.20(3)h flight <br>[ ][ ]|[ ][ ]|[ ][ ] < 20m dock(roll) <br>[ ][ ][ ][ ][ ][ ] < Start Rolling<br>[ ][ ][ ][ ][ ][ ]<br>[ ][ ][ ][ ][ ][ ] < Critical"
+          },
+          {
+            "desc": "Boopsie's helmet is in the grenhouse ducts"
+          },
+          {
+            "desc": "Stun baton is in the crew quarters"
+          },
+          {
+            "desc": "Dr Antal is in the toilets"
+          },
+          {
+            "desc": "Plush is in engineering"
+          }
+        ],
+        "rewards": [
+          {
+            "type": "Weapon",
+            "desc": "Stun baton (1d5dmg, body save or stunned for 1 round)"
+          }
+        ]
+      }
+    }
+  ]
+}
