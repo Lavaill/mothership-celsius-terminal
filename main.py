@@ -1,5 +1,6 @@
 import sys
 import threading
+import traceback
 # Import utils first to ensure exception hooks are registered immediately
 from src.utils import logger
 from src.server import run_server
@@ -18,6 +19,7 @@ if __name__ == '__main__':
         app = MothershipApp()
         logger.info("Running TUI App...")
         app.run()
-    except Exception as e:
+    except BaseException as e:
         logger.critical("Fatal error in main execution", exc_info=True)
+        traceback.print_exc()
         sys.exit(1)
