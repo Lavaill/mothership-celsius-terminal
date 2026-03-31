@@ -6,7 +6,7 @@ import signal
 
 from src.app import worker
 from src.utils import logger
-from src.printer import printer_service
+from src.services.facade import mothership_service
 
 class GameRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -56,7 +56,7 @@ class GameRequestHandler(BaseHTTPRequestHandler):
         elif parsed.path == '/print/contracts':
             # API endpoint to print all contracts
             # Example: GET /print/contracts
-            success = printer_service.print_all_contracts()
+            success = mothership_service.print_all_contracts()
             response_msg = "Printing all contracts initiated" if success else "Failed to initiate printing"
             
         elif parsed.path.startswith('/print/contract/'):
@@ -64,7 +64,7 @@ class GameRequestHandler(BaseHTTPRequestHandler):
             # Example: GET /print/contract/BH-342
             mission_id = parsed.path.split('/')[-1]
             if mission_id:
-                success = printer_service.print_contract(mission_id)
+                success = mothership_service.print_contract(mission_id)
                 response_msg = f"Printing contract {mission_id} initiated" if success else f"Failed to find or print contract {mission_id}"
             else:
                 status_code = 400
@@ -75,7 +75,7 @@ class GameRequestHandler(BaseHTTPRequestHandler):
             # Example: GET /print/mission/BH-342
             mission_id = parsed.path.split('/')[-1]
             if mission_id:
-                success = printer_service.print_mission(mission_id)
+                success = mothership_service.print_mission(mission_id)
                 response_msg = f"Printing mission {mission_id} initiated" if success else f"Failed to find or print mission {mission_id}"
             else:
                 status_code = 400
@@ -84,7 +84,7 @@ class GameRequestHandler(BaseHTTPRequestHandler):
         elif parsed.path == '/print/oxygen':
             # API endpoint to print an oxygen bill
             # Example: GET /print/oxygen
-            success = printer_service.print_oxygen_bill()
+            success = mothership_service.print_oxygen_bill()
             response_msg = "Printing oxygen bill initiated" if success else "Failed to initiate printing"
 
         elif parsed.path.startswith('/print/wound/'):
@@ -94,7 +94,7 @@ class GameRequestHandler(BaseHTTPRequestHandler):
             wound_number = params.get('number', [None])[0]
             
             if wound_type:
-                success = printer_service.print_wound(wound_type, wound_number)
+                success = mothership_service.print_wound(wound_type, wound_number)
                 response_msg = f"Printing wound {wound_type} initiated" if success else f"Failed to print wound {wound_type}"
             else:
                 status_code = 400

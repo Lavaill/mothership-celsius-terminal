@@ -10,7 +10,7 @@ import math
 import time
 
 from src.app import worker
-from src.printer import printer_service
+from src.services.facade import mothership_service
 from src.utils import logger
 from src.theme import THEMES, TYPE_DELAY, LINE_DELAY
 
@@ -87,7 +87,7 @@ def get_completions(value: str) -> list[str]:
             subcmd = parts[1]
             if subcmd in ['contract', 'mission']:
                 typed_id = parts[2]
-                ids = printer_service.get_available_mission_ids()
+                ids = mothership_service.get_available_mission_ids()
                 # IDs are data, so we keep them as returned (likely upper), but match lower
                 return [f"print {subcmd} {mid}" for mid in ids if mid.lower().startswith(typed_id)]
     
@@ -104,7 +104,7 @@ def get_completions(value: str) -> list[str]:
         parts = value_lower.split(' ')
         if len(parts) == 2:
             prefix = parts[1]
-            wound_types = printer_service.get_wound_types()
+            wound_types = mothership_service.get_wound_types()
             return [f"wound {w}" for w in wound_types if w.lower().startswith(prefix)]
         if len(parts) == 3:
             # Suggest numbers 1-10
@@ -545,15 +545,15 @@ class MothershipApp(App):
         sec_color = self.theme_data["secondary"]
         try:
             if sub == "ALL-CONTRACTS":
-                printer_service.print_all_contracts()
+                mothership_service.print_all_contracts()
             elif sub == "CONTRACT" and len(args) > 1:
                 # args[1] is the ID. We assume the user might type lowercase, but files might be upper.
                 # printer_service expects exact match. Let's try upper.
-                printer_service.print_contract(args[1].upper()) 
+                mothership_service.print_contract(args[1].upper()) 
             elif sub == "MISSION" and len(args) > 1:
-                printer_service.print_mission(args[1].upper())
+                mothership_service.print_mission(args[1].upper())
             elif sub == "OXYGEN":
-                printer_service.print_oxygen_bill()
+                mothership_service.print_oxygen_bill()
             else:
                 self.call_from_thread(self.write_to_console, f"[{sec_color}]Invalid print parameters.[/{sec_color}]\n")
         except Exception as e:
@@ -563,7 +563,7 @@ class MothershipApp(App):
     def run_wound_task(self, wound_type, wound_number):
         sec_color = self.theme_data["secondary"]
         try:
-            if printer_service.print_wound(wound_type, wound_number):
+            if mothership_service.print_wound(wound_type, wound_number):
                 self.call_from_thread(self.write_to_console, f"[{sec_color}]Wound report printed successfully.[/{sec_color}]\n")
             else:
                 self.call_from_thread(self.write_to_console, f"[{sec_color}]Failed to print wound report. Check logs.[/{sec_color}]\n")

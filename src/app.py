@@ -1,8 +1,7 @@
 import threading
 import time
 from src.utils import logger
-from src.printer import printer_service
-from src.interface import Interface
+from src.services.facade import mothership_service
 
 class ApiWorker:
     def __init__(self):
@@ -47,7 +46,7 @@ class ApiWorker:
             
             try:
                 # Call the oxygen bill printer service
-                printer_service.print_oxygen_bill()
+                mothership_service.print_oxygen_bill()
             except Exception as e:
                 logger.log(f"API Call: Failed - {e}")
 

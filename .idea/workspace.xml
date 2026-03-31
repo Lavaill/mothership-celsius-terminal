@@ -5,16 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c7dab7c-0b60-44f4-9230-71ff9ff2ed0d" name="Changes" comment="Initial functional commit">
-      <change afterPath="$PROJECT_DIR$/.aiassistant/context.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/data/entities/entities.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/repository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.aiassistant/rules/gemini-rules.md" beforeDir="false" afterPath="$PROJECT_DIR$/.aiassistant/rules/gemini-rules.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.aiassistant/context.md" beforeDir="false" afterPath="$PROJECT_DIR$/.aiassistant/context.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/missions/active/AD-121_OperationAlDente.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/missions/active/AD-121_OperationAlDente.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/missions/active/BH-342_Zoomies.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/missions/active/BH-342_Zoomies.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/missions/active/REPO-073_Boobytrap.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/missions/active/REPO-073_Boobytrap.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cli.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/printer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/printer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tui.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/tui.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +58,7 @@
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/textual-support&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -65,7 +66,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMAiRulesSettingsProvider&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.android.studio.ml.templates&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }

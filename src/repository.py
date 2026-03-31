@@ -1,7 +1,30 @@
 import os
 from src.utils import logger
 from src.jsonParser import JsonParser
-from src.config import MISSIONS_ACTIVE_PATH, MISSIONS_INACTIVE_PATH, WOUNDS_PATH, FORTUNES_PATH
+from src.config import MISSIONS_ACTIVE_PATH, MISSIONS_INACTIVE_PATH, WOUNDS_PATH, FORTUNES_PATH, VAULT_PATH
+
+class VaultRepository:
+    """
+    Handles discovery and reading of Markdown files from an external Obsidian Vault.
+    Supports absolute paths and identifies 'Printable' notes.
+    """
+    def __init__(self, vault_path=None):
+        self.vault_path = vault_path or VAULT_PATH
+
+    def get_markdown_files(self):
+        """
+        Returns a list of all .md files in the vault (recursive).
+        """
+        if not os.path.exists(self.vault_path):
+            logger.error(f"Vault path not found: {self.vault_path}")
+            return []
+        
+        md_files = []
+        for root, _, files in os.walk(self.vault_path):
+            for file in files:
+                if file.endswith(".md"):
+                    md_files.append(os.path.join(root, file))
+        return md_files
 
 class MissionRepository:
     def __init__(self):

@@ -18,6 +18,18 @@ This document outlines the architecture, features, and core components of the Mo
     - Initializes and runs the `MothershipApp` (TUI) in the main thread.
     - Registers global exception handlers via `src.utils`.
 
+### `run.cmd`
+- **Role**: Windows batch script to launch the application.
+- **Functionality**:
+    - Ensures the correct virtual environment (`.venv`) is used.
+    - Provides a portable way to start the app without manually activating the environment.
+
+### `.env`
+- **Role**: User configuration file in the project root.
+- **Functionality**:
+    - Stores sensitive or user-specific paths like `VAULT_PATH` and `CACHE_PATH`.
+    - Allows for configuration overrides without modifying the source code.
+
 ### `src/tui.py`
 - **Role**: The main user interface (`MothershipApp`).
 - **Functionality**:
@@ -60,13 +72,18 @@ This document outlines the architecture, features, and core components of the Mo
     - `progress` (property): Calculates the completion percentage of the current timer interval for the UI.
 
 ### `src/printer.py`
-- **Role**: Handles all data retrieval and external API calls to the printer service.
+- **Role**: Pure I/O service for hardware delivery.
 - **Functionality**:
-    - `print_contract`, `print_mission`: Retrieves data from the `MissionRepository` and sends it to the printer.
-    - `print_all_contracts`: Prints **only** from the `active` folder, using the `MissionRepository`.
-    - `print_oxygen_bill`: Retrieves a random fortune from the `GeneratorRepository` and sends the oxygen bill payload. **This is a critical, existing feature.**
-    - `print_wound`: Retrieves wound data from the `GeneratorRepository`, rolls a die (if needed), and sends the wound payload.
-    - `get_available_mission_ids`, `get_wound_types`: Provides data for TUI autocomplete.
+    - `Printer` (class): Sends finalized JSON payloads to the printer hardware.
+    - Decoupled from all business logic (no knowledge of wounds or missions).
+
+### `src/services/`
+- **Role**: Business logic layer for specific game features.
+- **Components**:
+    - `wound_service.py`: Logic for wounds, dice rolls, and severity mapping.
+    - `mission_service.py`: Logic for mission/contract data and payload formatting.
+    - `billing_service.py`: Logic for oxygen bills and fortunes.
+    - `facade.py`: The `mothership_service` instance, providing a unified entry point for the TUI and API.
 
 ### `src/server.py`
 - **Role**: Provides an HTTP API to control the application.
@@ -103,12 +120,15 @@ This document outlines the architecture, features, and core components of the Mo
 - `data/missions/active/`: Contains JSON files for missions that are included in `print all`.
 - `data/missions/inactive/`: Contains JSON files for missions that are available for individual printing but excluded from `print all`.
 - `data/random-generators/`: Contains data for randomized events, like `Wounds.json` and `OxygenFortunes.json`.
+- `data/templates/`: Obsidian Markdown templates used for external vault integration and testing.
 - `Wounds.json`: Contains a `wound-severity` map and a list of `wound-tables` by type.
 
 ## 4. Architectural TODOs
 
-- **[TODO] Refactor `printer.py`**: The `Printer` class is becoming a "God Class". It should be broken down into smaller, more focused services (e.g., `WoundService`, `MissionService`).
-- **[DONE] Create Data Access Layer**: The logic for finding all data files has been abstracted into the `repository.py` module. The `Printer` service now uses this layer to access data, decoupling it from the file system.
-- **[TODO] Decouple TUI from Backend Services**: The TUI (`tui.py`) currently calls `printer_service` directly for autocomplete data. This creates a tight coupling. In the future, this could be routed through a "Facade" to make the UI more agnostic.
-- **[LATER] Refactor `printer.py`**: Implement the service refactor (Point 1).
-- **[LATER] Decouple TUI**: Implement the Facade pattern (Point 4).
+- **[DONE] Refactor `printer.py` into specialized services**: Logic has been moved to `src/services/` (Wound, Mission, Billing).
+- **[DONE] Decouple TUI via Facade**: The TUI now interacts exclusively with the `mothership_service` facade.
+- **[TODO] Implement Obsidian Vault Uplink (In-Memory Registry + Shadow Cache)**:
+    - Add `VAULT_PATH` and `CACHE_PATH` to `src/config.py`.
+    - Create `VaultRepository` to manage the external Obsidian file system.
+    - Create `ObsidianService` to handle Markdown parsing and JSON mirroring to the shadow cache.
+- **[LATER] Decommission Internal Data**: Once the Obsidian integration is stable, remove `resources/data/missions` and rely entirely on the external Vault.
