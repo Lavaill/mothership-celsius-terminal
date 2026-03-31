@@ -5,7 +5,13 @@ import threading
 from logging.handlers import RotatingFileHandler
 
 # Ensure logs directory exists
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# File: src/mothership/core/utils.py
+# Levels: 1.core, 2.mothership, 3.src, 4.Root
+core_dir = os.path.dirname(os.path.abspath(__file__))
+mothership_dir = os.path.dirname(core_dir)
+src_dir = os.path.dirname(mothership_dir)
+BASE_DIR = os.path.dirname(src_dir)
+
 LOG_DIR = os.path.join(BASE_DIR, "logs")
 os.makedirs(LOG_DIR, exist_ok=True)
 LOG_FILE = os.path.join(LOG_DIR, "mothership.log")

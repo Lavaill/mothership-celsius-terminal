@@ -4,9 +4,9 @@ import json
 import os
 import signal
 
-from src.app import worker
-from src.utils import logger
-from src.services.facade import mothership_service
+from mothership.core.app import worker
+from mothership.core.utils import logger
+from mothership.services.facade import mothership_service
 
 class GameRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):

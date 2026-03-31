@@ -5,17 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c7dab7c-0b60-44f4-9230-71ff9ff2ed0d" name="Changes" comment="Initial functional commit">
+      <change afterPath="$PROJECT_DIR$/.geminiignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GEMINI.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/data/templates/AD-121_OperationAlDente.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/data/templates/Mission-Template.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/run.cmd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.aiassistant/context.md" beforeDir="false" afterPath="$PROJECT_DIR$/.aiassistant/context.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cli.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/printer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/printer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/repository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tui.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/tui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dice.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jsonParser.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/printer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/repository.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/theme.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tui.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

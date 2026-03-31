@@ -1,10 +1,15 @@
 import sys
+import os
+
+# Ensure the 'src' directory is in the Python path
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "src"))
+
 import threading
 import traceback
 # Import utils first to ensure exception hooks are registered immediately
-from src.utils import logger
-from src.server import run_server
-from src.tui import MothershipApp
+from mothership.core.utils import logger
+from mothership.ui.server import run_server
+from mothership.ui.tui import MothershipApp
 
 if __name__ == '__main__':
     logger.info("--- Application Startup ---")

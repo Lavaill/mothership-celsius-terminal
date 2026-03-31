@@ -1,7 +1,7 @@
 import os
-from src.utils import logger
-from src.jsonParser import JsonParser
-from src.config import MISSIONS_ACTIVE_PATH, MISSIONS_INACTIVE_PATH, WOUNDS_PATH, FORTUNES_PATH, VAULT_PATH
+from mothership.core.utils import logger
+from mothership.data.json_parser import JsonParser
+from mothership.core.config import MISSIONS_ACTIVE_PATH, MISSIONS_INACTIVE_PATH, WOUNDS_PATH, FORTUNES_PATH, VAULT_PATH
 
 class VaultRepository:
     """

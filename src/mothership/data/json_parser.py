@@ -4,10 +4,15 @@ import os
 class JsonParser:
     def __init__(self, project_root=None):
         if project_root is None:
-            # Go up one level from src to get project root
-            # current file is in src/jsonParser.py
-            base_dir = os.path.dirname(os.path.abspath(__file__))
-            project_root = os.path.dirname(base_dir)
+            # Current file: src/mothership/data/json_parser.py
+            # 1. data/
+            # 2. mothership/
+            # 3. src/
+            # 4. MothershipCli/ (Root)
+            data_dir = os.path.dirname(os.path.abspath(__file__))
+            mothership_dir = os.path.dirname(data_dir)
+            src_dir = os.path.dirname(mothership_dir)
+            project_root = os.path.dirname(src_dir)
         
         self.resources_dir = os.path.join(project_root, 'resources')
 

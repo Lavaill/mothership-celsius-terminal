@@ -7,12 +7,12 @@ from textual import work
 import asyncio
 import os
 import math
-import time
-
-from src.app import worker
-from src.services.facade import mothership_service
-from src.utils import logger
-from src.theme import THEMES, TYPE_DELAY, LINE_DELAY
+import sys
+from mothership.core.app import worker
+from mothership.services.facade import mothership_service
+from mothership.core.utils import logger
+from mothership.ui.theme import THEMES, TYPE_DELAY, LINE_DELAY
+import asyncio
 
 logger.info("TUI: Module loading...")
 

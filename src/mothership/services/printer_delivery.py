@@ -1,7 +1,7 @@
 import urllib.request
 import urllib.error
 import json
-from src.utils import logger
+from mothership.core.utils import logger
 
 class Printer:
     """

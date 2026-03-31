@@ -1,7 +1,7 @@
 import threading
 import time
-from src.utils import logger
-from src.services.facade import mothership_service
+from mothership.core.utils import logger
+from mothership.services.facade import mothership_service
 
 class ApiWorker:
     def __init__(self):
