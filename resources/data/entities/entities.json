@@ -1,0 +1,923 @@
+[
+  {
+    "id": "XB-28",
+    "designation": "Osteo-Solvent Pathogen | Strain XB-Marrow | Calciphage-Omega | Structural-Liquefaction Agent | Xeno-Osteoclast",
+    "classification": {
+      "composition": "PROTEAN",
+      "vectors": ["PARASITIC", "KINETIC"],
+      "scale": "SAMPLE",
+      "ral": 2,
+      "stress_profile": "VISCERAL"
+    },
+    "omens": [
+      "Discovery of discarded, hollowed-out clothing in a slumped, humanoid shape.",
+      "Pools of translucent, protein-rich 'sludge' containing no solid matter.",
+      "Faint, wet grinding sounds echoing from inside ventilation ducts."
+    ],
+    "forms": [
+      {
+        "name": "Dormant Spore",
+        "type": "Phased",
+        "description": "Microscopic, inhaled particulate. Undetectable without deep bio-scans."
+      },
+      {
+        "name": "Active Phage",
+        "type": "Adult",
+        "description": "A rapidly multiplying cellular colony that digests calcium-heavy structures."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Evolved to digest calcified reefs. In humans, it liquefies the skeleton while leaving the nervous system intact. Victims remain conscious as their physical structure fails.",
+    "mechanics": {
+      "stats": { "combat": "N/A", "instinct": "N/A", "hits": "N/A" },
+      "special_rules": "Liquefaction: Infected players lose 1 Strength per hour. At 0 Strength, the host collapses. Permanent without surgical bone-grafting."
+    }
+  },
+  {
+    "id": "XS-31",
+    "designation": "Conductive-Weaver | Filament Saboteur | Grid-Parasite Arthropod | Silk-Capacitor Entity | Electro-Arachnoid",
+    "classification": {
+      "composition": "SOMATIC",
+      "vectors": ["OPERATIONAL", "KINETIC"],
+      "scale": "HANDHELD",
+      "ral": 2,
+      "stress_profile": "NEUTRAL"
+    },
+    "omens": [
+      "Persistent power flickers and 'ghost' signals in local deck sub-grids.",
+      "Fine, copper-colored 'cobwebs' found behind server racks or power junction boxes.",
+      "The smell of ozone and burnt plastic near cable conduits."
+    ],
+    "forms": [
+      {
+        "name": "Drone-Weaver",
+        "type": "Adult",
+        "description": "A six-legged, silicon-carapace arthropod that excretes high-tensile, copper-infused silk."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Lightning-swept canyons. It weaves conductive nets to trap electrified prey. On ships, it nests in mainframes, causing catastrophic electrical fires and short-circuits.",
+    "mechanics": {
+      "stats": { "combat": "30%", "instinct": "65%", "hits": "1 (10)" },
+      "special_rules": "Live Wire: Touching webs or the creature without insulated gear deals 1d10 shock damage and stuns for 1 round."
+    }
+  },
+  {
+    "id": "XL-33",
+    "designation": "Endothermic Lithic-Siphon | Cryo-Absorber Alpha | Heat-Sink Annelid | Zero-Kelvin Parasite | Thermal-Void Entity",
+    "classification": {
+      "composition": "LITHIC",
+      "vectors": ["OPERATIONAL", "KINETIC"],
+      "scale": "HANDHELD",
+      "ral": 2,
+      "stress_profile": "CLANDESTINE"
+    },
+    "omens": [
+      "Frost buildup on bulkheads in rooms that are otherwise functioning at standard temperature.",
+      "Visibility of breath in a room with active heating life-support.",
+      "Rattling or 'ticking' sounds in hot water or steam pipes as energy is drained."
+    ],
+    "forms": [
+      {
+        "name": "Mineral-Tick",
+        "type": "Adult",
+        "description": "A jagged, metallic parasite resembling bismuth crystals; sub-zero surface temperature."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Molten planetary cores. It survives by siphoning extreme thermal energy. When latched to a ship or host, it flash-freezes the vicinity to maintain its internal stasis.",
+    "mechanics": {
+      "stats": { "combat": "40%", "instinct": "50%", "hits": "2 (20)", "armor": "15" },
+      "special_rules": "Thermal Drain: Anyone in Close range takes 1d5 cold damage per round. Melee weapons may shatter on impact (Strength check to avoid)."
+    }
+  },
+  {
+    "id": "XP-46",
+    "designation": "Gestalt-Biomass Spore | Neural-Singularity Pathogen | Hive-Integration Fungus | Flesh-Network Agent | Apex-Mycelium",
+    "classification": {
+      "composition": "PROTEAN",
+      "vectors": ["PARASITIC", "PSYCHOLOGICAL"],
+      "scale": "OVERSIZED",
+      "ral": 3,
+      "stress_profile": "ONTOLOGICAL"
+    },
+    "omens": [
+      "Synchronized rhythmic pulsing of internal station lights across multiple decks.",
+      "Unexplained humming on all audio comms channels, following a binary or mathematical cadence.",
+      "Faint whispering coming from air vents that mimics the voices of deceased or missing crew."
+    ],
+    "forms": [
+      {
+        "name": "Infection Vector",
+        "type": "Phased",
+        "description": "Airborne spores that latch onto the cerebral cortex via the olfactory bulb."
+      },
+      {
+        "name": "Cerebral-Node",
+        "type": "Adult",
+        "description": "Pulsating mounds of fused biological matter that act as decentralized server nodes."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Converting biosphere mass into planetary processing units. It networks all life into a single, screaming brain. Infected crew retain memories but lose all agency to the hive-logic.",
+    "mechanics": {
+      "stats": { "combat": "50%", "instinct": "90%", "hits": "Special" },
+      "special_rules": "Hive-Logic: Infected crew use pack tactics (Advantage). Hearing the hive speak through the walls requires a Sanity Save (1d10 Stress) every 10 mins."
+    }
+  },
+  {
+    "id": "XL-50",
+    "designation": "Stellar-Mass Siphon | Helio-Phage Sovereign | Dyson-Organism | Photosphere-Parasite | Celestial Endotherm",
+    "classification": {
+      "composition": "LITHIC",
+      "vectors": ["STRUCTURAL", "OPERATIONAL"],
+      "scale": "SOVEREIGN",
+      "ral": 3,
+      "stress_profile": "ONTOLOGICAL"
+    },
+    "omens": [
+      "Unscheduled solar eclipses or 'black spots' appearing on a system's star.",
+      "Sudden, massive drop in external hull temperature and solar panel efficiency.",
+      "Gravitational shearing alarms triggering on the bridge despite being in open space."
+    ],
+    "forms": [
+      {
+        "name": "Stellar-Parasite",
+        "type": "Adult",
+        "description": "A moon-sized crystalline entity with unfolding dark-matter sails."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Stellar parasite. Feeds on the coronal mass of stars, accelerating solar decay. Its presence disrupts hyperspace physics and gravity within 10 AU.",
+    "mechanics": {
+      "stats": { "combat": "N/A", "instinct": "N/A", "hits": "N/A" },
+      "special_rules": "System Death: Ship power levels fluctuate wildly. Automatic Sanity Save (Fear) upon seeing the entity blot out the sun."
+    }
+  },
+  {
+    "id": "XL-57",
+    "designation": "Ferrous-Bryophyte | Magno-Taxis Flora | Lodestone-Vegetation | Polarity-Sensitive Growth | Iron-Cell Colony",
+    "classification": {
+      "composition": "LITHIC",
+      "vectors": ["OPERATIONAL", "INERT"],
+      "scale": "SAMPLE",
+      "ral": 0,
+      "stress_profile": "NEUTRAL"
+    },
+    "omens": [
+      "Compass needles or analog gauges spinning wildly in specific corridors.",
+      "Fine red dust (oxidized spores) gathering on ventilation grates.",
+      "Small metallic objects (screws, coins) sticking to the walls where the moss grows."
+    ],
+    "forms": [
+      {
+        "name": "Mature Carpet",
+        "type": "Adult",
+        "description": "A dense, metallic-grey moss that grows in spiral patterns aligned with magnetic fields."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Grows on iron-heavy asteroids, aligning its cellular structure to planetary magnetic poles for stability. Often harvested by survivalists to create un-jammable primitive compasses. Harmless, but massive colonies can interfere with sensitive navigational sensors.",
+    "mechanics": {
+      "stats": { "combat": "N/A", "instinct": "N/A", "hits": "N/A" },
+      "special_rules": "Magnetic Interference: Electronics checks made within Close range of a large colony are at Disadvantage due to magnetic distortion."
+    }
+  },
+  {
+    "id": "XS-59",
+    "designation": "Aero-Sieve Ray | Particulate-Skimmer | Atmospheric-Dredge | Gas-Giant Glider | Bio-Scrubber Manta",
+    "classification": {
+      "composition": "SOMATIC",
+      "vectors": ["INERT", "OPERATIONAL"],
+      "scale": "OVERSIZED",
+      "ral": 0,
+      "stress_profile": "NEUTRAL"
+    },
+    "omens": [
+      "Unusually clean air in large, industrial hangar bays.",
+      "Soft, leathery flapping sounds echoing from the rafters or upper atmosphere processing decks.",
+      "Piles of compressed, excreted mineral cubes found on the flight deck floor."
+    ],
+    "forms": [
+      {
+        "name": "Skimmer",
+        "type": "Adult",
+        "description": "A flat, wide-winged organism with a massive filter-mouth, resembling a terrestrial manta ray."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Upper-atmosphere filter feeder on Gas Giants. It passively strains dust and micro-particulates. Often introduced intentionally to colony hangars to keep air scrubbers from clogging. Docile, but can accidentally block intake turbines.",
+    "mechanics": {
+      "stats": { "combat": "10%", "instinct": "15%", "hits": "3 (30)" },
+      "special_rules": "Turbine Hazard: If sucked into a ship engine, it deals 1d100 Structural Damage to the drive system."
+    }
+  },
+  {
+    "id": "XS-62",
+    "designation": "Lumina-Detonation Seed | Photo-Volatile Flora | Flash-Bulb Spore | Retinal-Trauma Pod | Strobe-Weed",
+    "classification": {
+      "composition": "SOMATIC",
+      "vectors": ["KINETIC", "PSYCHOLOGICAL"],
+      "scale": "SAMPLE",
+      "ral": 1,
+      "stress_profile": "VISCERAL"
+    },
+    "omens": [
+      "Bleached shadows burned into the wall paint (indicating a previous detonation).",
+      "The distinct 'clicking' sound of a pressurized pod arming itself when approached.",
+      "Discarded eye-protection gear or blinded vermin stumbling nearby."
+    ],
+    "forms": [
+      {
+        "name": "Reactive Pod",
+        "type": "Static",
+        "description": "A bulbous, translucent seed pod pulsing with bioluminescent chemicals. Explodes when vibrated."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Light-starved cave floors. It detonates with 50,000 lumens to blind and scare off nocturnal herbivores, allowing the seeds to stick to the fleeing animal's fur. Dangerous to unshielded human retinas.",
+    "mechanics": {
+      "stats": { "combat": "N/A", "instinct": "N/A", "hits": "1" },
+      "special_rules": "Flash-Bang: Triggered by movement. DEX Save or be Blinded for 1d10 minutes. Critical Fail results in permanent retinal scarring (-10% to all visual checks)."
+    }
+  },
+  {
+    "id": "XL-66",
+    "designation": "Gravimetric-Annelid | G-Force Nematode | Artificial-Gravity Parasite | Mass-Sensor Worm | Orbital-Driller",
+    "classification": {
+      "composition": "LITHIC",
+      "vectors": ["OPERATIONAL", "STRUCTURAL"],
+      "scale": "HANDHELD",
+      "ral": 1,
+      "stress_profile": "NEUTRAL"
+    },
+    "omens": [
+      "Sudden sensations of vertigo or weightlessness in specific corridor sections.",
+      "Loose objects floating a few inches off the ground.",
+      "Grinding, scratching noises coming from inside the gravity-plating of the floor."
+    ],
+    "forms": [
+      {
+        "name": "Borer",
+        "type": "Adult",
+        "description": "A rock-skinned, segmented worm that eats the rare-earth magnets found in gravity generators."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: High-gravity worlds. It navigates via planetary gravity lines and eats magnetic ore. On ships, it swarms the Artificial Gravity generators, chewing through the coils and causing localized Zero-G pockets.",
+    "mechanics": {
+      "stats": { "combat": "20%", "instinct": "40%", "hits": "2 (15) Armor: 10" },
+      "special_rules": "Gravity Well: The worm can increase its own density. It cannot be moved/knocked back. Killing it requires Armor Piercing damage."
+    }
+  },
+  {
+    "id": "XS-67",
+    "designation": "Pulmonary-Excavator | Alveoli-Parasite | Breath-Stealer Larva | Oxygen-Siphon Helminth | Bronchial-Intruder",
+    "classification": {
+      "composition": "SOMATIC",
+      "vectors": ["PARASITIC", "KINETIC"],
+      "scale": "SAMPLE",
+      "ral": 2,
+      "stress_profile": "VISCERAL"
+    },
+    "omens": [
+      "Crew members complaining of persistent dry coughs or shortness of breath.",
+      "Low Oxygen alarms triggering in sleeping quarters despite life-support functioning normally.",
+      "Bloody sputum or flecks of tissue found in sinks and handkerchiefs."
+    ],
+    "forms": [
+      {
+        "name": "Seeker-Larva",
+        "type": "Phased",
+        "description": "A finger-length, slime-coated slug that crawls into the mouth of sleeping victims."
+      },
+      {
+        "name": "Anchor-State",
+        "type": "Adult",
+        "description": "Once inside, it hooks into the bronchial tubes and absorbs O2 directly from the bloodstream."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Methane-heavy swamps. Evolved to burrow into the air-sacs of native fauna to steal their concentrated oxygen reserves. In humans, it reduces lung capacity by 50% per parasite. Removal is high-risk surgery only.",
+    "mechanics": {
+      "stats": { "combat": "10% (Outside host)", "instinct": "80%", "hits": "1" },
+      "special_rules": "Suffocation: Host suffers Disadvantage on all Stamina checks. If not removed in 1d10 days, the host asphyxiates during sleep. Surgery requires a Medical Check [-20%]."
+    }
+  },
+  {
+    "id": "XS-75",
+    "designation": "Reactive-Mycelium Ordnance | Bio-Mime Pod | Anaphylactic Fungal Sac | Pressure-Sensitive Puffball | Post-Mortem Incubator",
+    "classification": {
+      "composition": "SOMATIC",
+      "vectors": ["PARASITIC", "KINETIC"],
+      "scale": "SAMPLE",
+      "ral": 1,
+      "stress_profile": "VISCERAL"
+    },
+    "omens": [
+      {"desc": "A heavy, sweet smell reminiscent of baking yeast and rotting meat in the corridor."},
+      {"desc": "Fine, mustard-yellow dust coating the boots of returning survey teams."},
+      {"desc": "Small, fleshy nodules growing out of the deck plating that pulse warmly when approached."}
+    ],
+    "forms": [
+      {
+        "name": "Pressure-Pod",
+        "type": "Adult",
+        "description": "A melon-sized, leathery fungal sack that violently ruptures under 20kg or more of direct pressure."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Evolved to spread spores by startling large herbivores. Stepping on the pod triggers a high-velocity ejection of particulate that induces immediate, severe anaphylactic shock in humans. The resulting corpse serves as a nutrient-rich incubator for the next generation of pods.",
+    "mechanics": {
+      "stats": { "combat": "N/A", "instinct": "N/A", "hits": "1" },
+      "special_rules": "Bio-Mine: Triggers if stepped on. Everyone in Close range must make a Body Save or suffer 2d10 damage and begin suffocating from anaphylaxis (requires Epi-Pen or Medbay)."
+    }
+  },
+  {
+    "id": "XP-82",
+    "designation": "Necro-Motor Cordyceps | Post-Mortem Ambulation Agent | Neural-Reanimation Mold | Somatic Hijacker | Carrion-Driver",
+    "classification": {
+      "composition": "PROTEAN",
+      "vectors": ["PARASITIC", "KINETIC"],
+      "scale": "STANDARD",
+      "ral": 2,
+      "stress_profile": "VISCERAL"
+    },
+    "omens": [
+      {"desc": "Heavy, dragging footsteps combined with wet, snapping sounds (breaking rigor mortis)."},
+      {"desc": "Medical monitors showing flatlines for crew members who are actively walking the halls."},
+      {"desc": "A thick, grey fungal mat growing over the eyes and mouth of a deceased crew member."}
+    ],
+    "forms": [
+      {
+        "name": "Reanimated Host",
+        "type": "Adult",
+        "description": "A deceased humanoid driven by a fungal network that has hijacked the central nervous system."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Evolved to walk dead mega-fauna to nutrient-rich water sources for optimal decay. On a ship, it takes over dead crewmen, using their bodies as violent delivery systems to create more corpses for the colony.",
+    "mechanics": {
+      "stats": { "combat": "45%", "instinct": "20%", "hits": "3 (30)" },
+      "special_rules": "Dead Flesh: Immune to pain, vacuum, and toxic gas. Must be dismembered or destroyed via extreme trauma (incineration/explosives) to stop ambulation."
+    }
+  },
+  {
+    "id": "XP-87",
+    "designation": "Caustic-Amoeba | Blubber-Solvent Slime | Tissue-Liquefaction Ooze | Necrotizing Protean | Hyper-Corrosive Gel",
+    "classification": {
+      "composition": "PROTEAN",
+      "vectors": ["KINETIC", "STRUCTURAL"],
+      "scale": "HANDHELD",
+      "ral": 2,
+      "stress_profile": "VISCERAL"
+    },
+    "omens": [
+      {"desc": "Perfectly clean, white human bones lying in puddles of still-sizzling organic slurry."},
+      {"desc": "An intense, eye-watering smell of ammonia and melted fat."},
+      {"desc": "Soft, wet 'slapping' sounds as the amoeba drops from overhead pipes."}
+    ],
+    "forms": [
+      {
+        "name": "Digestive Mass",
+        "type": "Adult",
+        "description": "A translucent, slow-moving puddle of acidic jelly roughly the size of a dog."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Evolved to rapidly digest the thick blubber of arctic leviathans. While it cannot dissolve ship hulls or synthetic polymers, human tissue is chemically identical to its natural prey. It liquefies flesh down to the bone in seconds upon contact.",
+    "mechanics": {
+      "stats": { "combat": "30%", "instinct": "50%", "hits": "2 (20)" },
+      "special_rules": "Flesh-Melt: Melee attacks against it cause acidic splash-back. Any physical contact deals 2d10 damage per round until the gel is frozen, scraped off, or fully digests the limb."
+    }
+  },
+  {
+    "id": "XL-89",
+    "designation": "Monomolecular-Arachnid | Silicate-Filament Spinner | Razor-Wire Arthropod | Crystalline Trap-Maker | Amputation-Spider",
+    "classification": {
+      "composition": "LITHIC",
+      "vectors": ["KINETIC", "STRUCTURAL"],
+      "scale": "HANDHELD",
+      "ral": 2,
+      "stress_profile": "VISCERAL"
+    },
+    "omens": [
+      {"desc": "Perfectly halved vermin or rats lying on the floor with perfectly smooth, bloodless cuts."},
+      {"desc": "Faint, almost imperceptible glints of light floating at waist or neck height in dark corridors."},
+      {"desc": "Deep, hair-thin gouges cut directly into the ship's steel bulkheads where the webs are anchored."}
+    ],
+    "forms": [
+      {
+        "name": "Weaver",
+        "type": "Adult",
+        "description": "A silicon-based, multi-legged predator that excretes liquid glass."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Weaves monomolecular glass threads between canyon walls to slice flying prey in half as they pass. On a ship, it builds invisible tripwires in narrow corridors that will cleanly and instantly amputate the limbs of any running crew member.",
+    "mechanics": {
+      "stats": { "combat": "25%", "instinct": "70%", "hits": "1 (15)" },
+      "special_rules": "Invisible Guillotine: Anyone running through a webbed corridor must make a severe Body/Reflex save or suffer 3d10 damage and roll on the critical injury/amputation table."
+    }
+  },
+  {
+    "id": "XP-90",
+    "designation": "Cryo-Hemolytic Virus | Anti-Freeze Pathogen | Sub-Zero Crystallization Agent | Exothermic-Plasma Mutagen | Ice-Vein Microbe",
+    "classification": {
+      "composition": "PROTEAN",
+      "vectors": ["PARASITIC", "KINETIC"],
+      "scale": "SAMPLE",
+      "ral": 2,
+      "stress_profile": "VISCERAL"
+    },
+    "omens": [
+      {"desc": "Drops of blood on the floor that 'clink' like shattered glass when kicked."},
+      {"desc": "Crew members complaining of feeling freezing cold despite normal core temperatures."},
+      {"desc": "Deep blue, jagged frostbite patterns spreading along a victim's visible veins."}
+    ],
+    "forms": [
+      {
+        "name": "Micro-Vector",
+        "type": "Adult",
+        "description": "A microscopic, fluid-borne pathogen that targets red blood cells."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Evolved in extreme sub-zero environments, it survives by replacing host water with jagged, anti-freeze crystal structures. In humans, it turns the blood into circulating shrapnel, shredding the vascular system from the inside out.",
+    "mechanics": {
+      "stats": { "combat": "N/A", "instinct": "N/A", "hits": "N/A" },
+      "special_rules": "Internal Shrapnel: Infected players take 1d5 damage every time they sprint, engage in combat, or increase their heart rate, as the ice-crystals tear their arteries."
+    }
+  },
+  {
+    "id": "XO-92",
+    "designation": "Absolute-Zero Albedo Fungus | Void-Breach Mycelium | Topological-Tear Spore | Light-Sink Colony | Spatial-Shear Mold",
+    "classification": {
+      "composition": "OTHER",
+      "vectors": ["STRUCTURAL", "PSYCHOLOGICAL"],
+      "scale": "OVERSIZED",
+      "ral": 3,
+      "stress_profile": "ONTOLOGICAL"
+    },
+    "omens": [
+      {"desc": "Flashlights and emergency flares inexplicably dimming or failing to illuminate the end of a corridor."},
+      {"desc": "Complete loss of depth perception when looking at certain sections of the bulkhead."},
+      {"desc": "Laser fire fired down a hallway simply vanishing without a sound or impact flash."}
+    ],
+    "forms": [
+      {
+        "name": "Dimensional-Mat",
+        "type": "Adult",
+        "description": "A fungal colony that absorbs 99.99% of all light, appearing as a completely flat, 2D hole in reality."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Evolved in the space between dimensions, it bridges into our universe to feed on ambient photons and kinetic energy. It is so utterly black that looking at it causes severe vertigo. It doesn't just digest matter; it folds the space the matter occupies, effectively teleporting sections of the ship (and anyone touching it) into the void.",
+    "mechanics": {
+      "stats": { "combat": "N/A", "instinct": "N/A", "hits": "N/A (Immune to light/heat/lasers)" },
+      "special_rules": "Topological Trap: Anyone walking into the 'black space' must make a Body Save. On a failure, they fall into the mycelial pocket dimension. Permanently lost unless tethered."
+    }
+  },
+  {
+    "id": "XO-95",
+    "designation": "Sub-Atomic Decay Swarm | Bond-Severing Nanites | Chrono-Erosion Cloud | Molecular-Dissociation Agent | Entropy-Catalyst",
+    "classification": {
+      "composition": "OTHER",
+      "vectors": ["STRUCTURAL", "OPERATIONAL"],
+      "scale": "OVERSIZED",
+      "ral": 3,
+      "stress_profile": "ONTOLOGICAL"
+    },
+    "omens": [
+      {"desc": "Brand-new weapons or tools rusting and crumbling to dust in the span of a few minutes."},
+      {"desc": "A localized area smelling heavily of ozone, ancient dust, and decayed plastic."},
+      {"desc": "A shimmering, grey 'heat haze' hanging in the air that hums at a sub-audible frequency."}
+    ],
+    "forms": [
+      {
+        "name": "Erosion-Cloud",
+        "type": "Adult",
+        "description": "A microscopic, floating swarm of exotic entities that accelerate time/entropy locally."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Drifting deep-space scavengers that feed on the massive energy released when atomic bonds are forcibly severed. They do not attack humans directly; instead, they cause the ship, the air-scrubbers, and the crew's EVA suits to age 1,000 years in an hour. Containment is physically impossible using standard matter.",
+    "mechanics": {
+      "stats": { "combat": "N/A", "instinct": "90%", "hits": "Special (Dispersed by heavy EM fields only)" },
+      "special_rules": "Rapid Aging: Every 10 minutes spent in the swarm, all mechanical gear and armor permanently loses 1d10 from its effectiveness/stats. Weapons will jam or shatter."
+    }
+  },
+  {
+    "id": "XS-97",
+    "designation": "Biosphere-Synchronization Helminth | Free-Will Override Nematode | Neural-Network Parasite | Colony-Mind Trematode | Cognitive-Subjugation Worm",
+    "classification": {
+      "composition": "SOMATIC",
+      "vectors": ["PARASITIC", "PSYCHOLOGICAL"],
+      "scale": "SAMPLE",
+      "ral": 3,
+      "stress_profile": "CLANDESTINE"
+    },
+    "omens": [
+      {"desc": "Crew members working in perfect, terrifyingly silent synchronization, never speaking or bumping into each other."},
+      {"desc": "Bloodshot eyes with a faint, wriggling white thread visible just beneath the sclera."},
+      {"desc": "The sudden, unified turning of multiple crew members' heads to look at you simultaneously."}
+    ],
+    "forms": [
+      {
+        "name": "Synapse-Worm",
+        "type": "Adult",
+        "description": "A microscopic, translucent nematode that embeds itself in the frontal lobe."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Evolved to coordinate the defenses of an entire jungle moon's biosphere against apex predators. It systematically replaces the host's free will with a hyper-efficient, colony-wide consciousness. The host feels no pain or fear, only an overwhelming, serene desire to infect others for the 'greater good.'",
+    "mechanics": {
+      "stats": { "combat": "40% (per infected)", "instinct": "80%", "hits": "1" },
+      "special_rules": "Unified Threat: Infected cannot be reasoned with or intimidated. If one infected sees a player, all infected on the ship instantly know the player's exact location."
+    }
+  },
+  {
+    "id": "XS-114",
+    "designation": "Vacuum-Adapted Crustacean | EVA-Habituating Arthropod | Pressure-Displacement Crab | Synthetic-Shell Scavenger | Bipedal-Hermit Macroura",
+    "classification": {
+      "composition": "SOMATIC",
+      "vectors": ["KINETIC", "OPERATIONAL"],
+      "scale": "STANDARD",
+      "ral": 1,
+      "stress_profile": "CLANDESTINE"
+    },
+    "omens": [
+      {"desc": "Empty EVA suits missing from the airlock lockers without any log entries."},
+      {"desc": "A spacesuit standing in a dark corner, moving with a jerky, scuttling, non-human gait."},
+      {"desc": "Thick, briny pools of seawater found leaking from the joints of a discarded spacesuit."}
+    ],
+    "forms": [
+      {
+        "name": "Naked Scavenger",
+        "type": "Phased",
+        "description": "A pale, fleshy, human-sized crustacean with vulnerable, soft hindquarters."
+      },
+      {
+        "name": "Armored Hermit",
+        "type": "Adult",
+        "description": "The creature securely crammed inside a stolen human spacesuit, using the helmet as a visor."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: High-pressure ocean trenches. As a massive hermit-crab analog, it requires a rigid shell to protect its soft abdomen from extreme environments (like hard vacuum). It scavenges empty EVA suits. It is only hostile if a crew member is currently wearing the suit it wants.",
+    "mechanics": {
+      "stats": { "combat": "45%", "instinct": "30%", "hits": "3 (30)" },
+      "special_rules": "Armored: The creature gains the exact Armor rating of the suit it is wearing. Destroying the suit's visor forces it to flee to find a new 'shell'."
+    }
+  },
+  {
+    "id": "XS-124",
+    "designation": "Ballistic-Quill Primate | Calcified-Flechette Simian | Arboreal-Impaler | Ranged-Puncture Biped | Aculeus-Throwing Hominid",
+    "classification": {
+      "composition": "SOMATIC",
+      "vectors": ["KINETIC"],
+      "scale": "STANDARD",
+      "ral": 2,
+      "stress_profile": "VISCERAL"
+    },
+    "omens": [
+      {"desc": "Dull 'thwack' sounds echoing from the high ceilings of the cargo bay."},
+      {"desc": "Bone-like, serrated javelins the size of knitting needles found embedded deep into steel bulkheads."},
+      {"desc": "Blood dripping from the rafters, revealing a crew member pinned to the ceiling by their limbs."}
+    ],
+    "forms": [
+      {
+        "name": "Hunter",
+        "type": "Adult",
+        "description": "A lean, four-armed primate analog covered in dense, calcified spikes along its forearms."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Dense, low-gravity jungle canopies. It shoots calcified quills from its muscular forearms at high velocity to pin fast-moving flying prey to tree trunks. On a ship, it utilizes the verticality of cargo bays and elevator shafts to pin crew members to the walls before descending to feed.",
+    "mechanics": {
+      "stats": { "combat": "60%", "instinct": "50%", "hits": "4 (40)" },
+      "special_rules": "Pinning Shot: Ranged attack (Damage 1d10). On a hit, the target must pass a Strength Save or be pinned to the nearest wall/floor, requiring an action to rip the barb out (taking 1d5 bleeding damage)."
+    }
+  },
+  {
+    "id": "XL-130",
+    "designation": "Hydro-Tropic Calcifier | Bipedal-Reef Parasite | Aquatic-Suicide Spore | Somatic-Coral Hijacker | Drowning-Drive Polyp",
+    "classification": {
+      "composition": "LITHIC",
+      "vectors": ["PARASITIC", "STRUCTURAL"],
+      "scale": "STANDARD",
+      "ral": 2,
+      "stress_profile": "VISCERAL"
+    },
+    "omens": [
+      {"desc": "Wet, briny footprints leading away from crew quarters and toward the life-support/water reclamation decks."},
+      {"desc": "Crew members developing hard, grey, coral-like patches of 'dry skin' on their necks and joints."},
+      {"desc": "A strong smell of stagnant ocean water and calcified decay in the airlock."}
+    ],
+    "forms": [
+      {
+        "name": "Calcified Host",
+        "type": "Adult",
+        "description": "A humanoid host completely encased in sharp, grey reef-structures, driven blindly toward liquids."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Evolved on shallow oceanic worlds. The coral parasitizes terrestrial bipeds, overriding their nervous system to march them back into the sea to drown and serve as a nutrient-rich anchor for a new reef. On a ship, the host will violently fight their way to the water reclamation tanks, drowning themselves and fatally tainting the crew's drinking supply with spores.",
+    "mechanics": {
+      "stats": { "combat": "40%", "instinct": "30%", "hits": "3 (30) Armor: 15" },
+      "special_rules": "Water-Borne Hazard: If a host reaches the water tanks, the ship's water supply becomes a Vector. Drinking it requires a Body Save or the infection begins."
+    }
+  },
+  {
+    "id": "XS-134",
+    "designation": "Feline-Mimicry Cephalopod | Empathy-Exploitation Polyp | Nutritional-Parasite (Non-Lethal) | Sub-Vocal Manipulator | Bio-Camouflage Scavenger",
+    "classification": {
+      "composition": "SOMATIC",
+      "vectors": ["PSYCHOLOGICAL", "INERT"],
+      "scale": "HANDHELD",
+      "ral": 0,
+      "stress_profile": "CLANDESTINE"
+    },
+    "omens": [
+      {"desc": "Ship rations depleting at 400% the normal rate despite no increase in crew."},
+      {"desc": "A domestic 'cat' casting a shadow that clearly features eight writhing tentacles."},
+      {"desc": "A wet, suction-cup-like 'squelch' sound accompanying the creature's purr."}
+    ],
+    "forms": [
+      {
+        "name": "Mimic-State",
+        "type": "Adult",
+        "description": "A boneless, highly malleable cephalopod that folds its tentacles to flawlessly resemble a domestic feline."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: A harmless, highly intelligent scavenger. It survives by mimicking the offspring of apex predators, triggering maternal/empathy instincts so the predator feeds it. On human ships, it mimics cats to manipulate the crew into feeding it high-grade protein rations.",
+    "mechanics": {
+      "stats": { "combat": "5%", "instinct": "80%", "hits": "1 (5)" },
+      "special_rules": "Empathic Drain: While harmless to personnel, it is a massive drain on resources. Personnel must pass an Intellect Save to willingly deny it food or throw it off the ship."
+    }
+  },
+  {
+    "id": "XS-142",
+    "designation": "Neuro-Electric Flora | Synapse-Draining Orchid | Retrograde-Amnesia Bloom | Cognitive-Siphon Blossom | Memory-Consuming Botanical",
+    "classification": {
+      "composition": "SOMATIC",
+      "vectors": ["PSYCHOLOGICAL", "PARASITIC"],
+      "scale": "SAMPLE",
+      "ral": 1,
+      "stress_profile": "ONTOLOGICAL"
+    },
+    "omens": [
+      {"desc": "A surprisingly beautiful, glowing flower thriving in a dark cabin with zero sunlight or water."},
+      {"desc": "Crew members suddenly unable to recall the faces of their spouses, or the names of their children."},
+      {"desc": "A faint, static-electric shock received when touching the stem of the plant."}
+    ],
+    "forms": [
+      {
+        "name": "Blooming Siphon",
+        "type": "Adult",
+        "description": "A bioluminescent, purple orchid-analog with a root system that taps directly into metallic bulkheads."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Evolved in pitch-black caves. It feeds on the neuro-electrical emissions of hibernating bats. On a ship, keeping it by your bed provides it direct access to deep-sleep brainwaves. It selectively deletes and consumes the oldest, most emotionally charged memories to fuel its bloom.",
+    "mechanics": {
+      "stats": { "combat": "N/A", "instinct": "N/A", "hits": "1" },
+      "special_rules": "Cognitive Deletion: Sleeping in the same room as the Orchid requires a Sanity Save. On failure, permanently lose 1d5 Intellect and a core character memory."
+    }
+  },
+  {
+    "id": "XO-147",
+    "designation": "Divine-Resonance Feline | Theta-Wave Synchronizer | Cult-Inducing Parasite | Religious-Hysteria Vector | Neuro-Subjugation Mammal",
+    "classification": {
+      "composition": "OTHER",
+      "vectors": ["PSYCHOLOGICAL", "PARASITIC"],
+      "scale": "HANDHELD",
+      "ral": 2,
+      "stress_profile": "CLANDESTINE"
+    },
+    "omens": [
+      {"desc": "Discovery of makeshift 'shrines' built out of ration tins and wiring in the cargo bay."},
+      {"desc": "A sudden, unnatural cessation of all interpersonal conflicts and stress among the crew."},
+      {"desc": "Unauthorized, highly dangerous modifications to the life-support system designed to perfectly match the creature's breeding climate."}
+    ],
+    "forms": [
+      {
+        "name": "Resonance-Emitter",
+        "type": "Adult",
+        "description": "A hairless, fragile feline analog that emits a constant, sub-audible hum."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Evolved as a physically defenseless prey animal, it survives by emitting a frequency that synchronizes with the theta waves of apex predators, inducing a state of religious awe. On human ships, it creates indirect slaves. The crew slowly begins worshipping the creature, eventually dying of starvation as they prioritize its needs over their own.",
+    "mechanics": {
+      "stats": { "combat": "10%", "instinct": "90%", "hits": "1 (5)" },
+      "special_rules": "Divine Thrall: Anyone spending more than 24 hours with the creature must make a Sanity Save at Disadvantage. Failures will violently defend the creature against any perceived threat, including their own uninfected crewmates."
+    }
+  },
+  {
+    "id": "XS-151",
+    "designation": "Bio-Accumulator Feline | Toxin-Hoarding Quadruped | Lethal-Shedding Scrubber | Poison-Sink Mammal | Hazard-Concentration Pet",
+    "classification": {
+      "composition": "SOMATIC",
+      "vectors": ["PARASITIC", "KINETIC"],
+      "scale": "HANDHELD",
+      "ral": 2,
+      "stress_profile": "CLANDESTINE"
+    },
+    "omens": [
+      {"desc": "The air in the creature's immediate vicinity smells clinically sterile, like a hospital room."},
+      {"desc": "Small vent-vermin found dead and perfectly preserved near the creature's sleeping area."},
+      {"desc": "The creature's fur crackles with static and leaves chemical burns on unprotected skin."}
+    ],
+    "forms": [
+      {
+        "name": "Toxic-Sink",
+        "type": "Adult",
+        "description": "A six-legged feline with thick, greasy fur that passively absorbs airborne contaminants."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Evolved on volcanically active worlds with highly toxic atmospheres. It survives by acting as a biological air scrubber, pulling poisons from the air and trapping them in its fur. The hazard arises because it does not neutralize these toxins—it hoards them. If violently killed or severely startled, it defensively sheds its coat all at once.",
+    "mechanics": {
+      "stats": { "combat": "20%", "instinct": "40%", "hits": "1 (10)" },
+      "special_rules": "Lethal Shedding: If reduced to 0 hits, or if a player fails a Fear save near it, it explodes in a cloud of concentrated industrial toxins. All players in the room take 3d10 damage (ignores standard armor) and must make a Body Save or be poisoned."
+    }
+  },
+  {
+    "id": "XS-155",
+    "designation": "Synaptic-Leech Feline | Somnambulist-Feeder | Short-Term Amnesia Predator | Proboscis-Thief | Ear-Canal Parasite",
+    "classification": {
+      "composition": "SOMATIC",
+      "vectors": ["PARASITIC", "PSYCHOLOGICAL"],
+      "scale": "HANDHELD",
+      "ral": 1,
+      "stress_profile": "VISCERAL"
+    },
+    "omens": [
+      {"desc": "Crew members waking up with unexplained drops of blood or spinal fluid on their pillows."},
+      {"desc": "Missing logs, forgotten passwords, and a general loss of the last 12 to 24 hours of memory."},
+      {"desc": "The creature observed sleeping directly against the heads of resting personnel, purring loudly."}
+    ],
+    "forms": [
+      {
+        "name": "Synapse-Feeder",
+        "type": "Adult",
+        "description": "A soft-furred quadruped that conceals a six-inch, hair-thin proboscis within its mouth."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Evolved to parasitize massive, sleeping herbivores. It lulls prey into a deeper sleep with its purr, then extends a proboscis through the ear canal to feed directly on electrical synapses. It doesn't kill the host, but the feeding process totally erases the host's short-term memory.",
+    "mechanics": {
+      "stats": { "combat": "15%", "instinct": "70%", "hits": "1 (5)" },
+      "special_rules": "Amnesiac Drain: A player fed upon during rest recovers no Stress and completely forgets all events, clues, and codes learned during the previous gaming session."
+    }
+  },
+  {
+    "id": "XS-208",
+    "designation": "Laryngeal-Replacement Parasite | Vocal-Cord Hijacker | Sub-Vocal Symbiote | Audio-Mimic Helminth | Tracheal-Burrower",
+    "classification": {
+      "composition": "SOMATIC",
+      "vectors": ["PARASITIC", "PSYCHOLOGICAL"],
+      "scale": "SAMPLE",
+      "ral": 2,
+      "stress_profile": "CLANDESTINE"
+    },
+    "omens": [
+      {"desc": "A crewmate constantly clearing their throat but speaking with a slightly flatter, more measured affect than usual."},
+      {"desc": "Small, bruised puncture wounds on the side of the neck, often hidden by popped collars or scarves."},
+      {"desc": "A glistening, multi-segmented mass briefly visible at the back of the throat when the host yawns."}
+    ],
+    "forms": [
+      {
+        "name": "Laryngeal-Anchor",
+        "type": "Adult",
+        "description": "A fleshy, ribbed parasite that securely wraps around the trachea and integrates with the vocal cords."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: An ambush predator that perfectly replicates the distress calls of its host species. In humans, it surgically replaces the vocal cords. The host is fully conscious but physically cannot speak to warn others; the parasite speaks for them, perfectly mimicking their voice to assure the crew that everything is completely fine.",
+    "mechanics": {
+      "stats": { "combat": "N/A", "instinct": "80%", "hits": "1" },
+      "special_rules": "Forced Silence: The host cannot verbally communicate. If they attempt to write a warning or use sign language, the parasite instantly induces a violent, incapacitating choking reflex."
+    }
+  },
+  {
+    "id": "XP-210",
+    "designation": "Ergonomic-Stimulus Fungus | Productivity-Enhancing Spore | Symbiotic-Efficiency Mold | Euphoric-Labor Parasite | Hyper-Focus Mycelium",
+    "classification": {
+      "composition": "PROTEAN",
+      "vectors": ["PARASITIC", "PSYCHOLOGICAL"],
+      "scale": "SAMPLE",
+      "ral": 2,
+      "stress_profile": "CLANDESTINE"
+    },
+    "omens": [
+      {"desc": "A historically lazy or average crew member suddenly volunteering for back-to-back double shifts with zero complaints."},
+      {"desc": "Manic, pinpoint-dilated pupils and a constant, slightly strained smile."},
+      {"desc": "Severe hoarding of high-calorie nutrient paste to sustain an unnaturally elevated metabolic rate."}
+    ],
+    "forms": [
+      {
+        "name": "Neural-Mycelium",
+        "type": "Adult",
+        "description": "A microscopic fungal network that permanently laces itself through the frontal lobe and adrenal glands."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Modifies host behavior to ensure maximum geographic dispersal. The fungus floods the host's brain with dopamine whenever they perform 'helpful' tasks. The host does not realize they are infected—they just feel incredibly focused. The parasite's ultimate goal is to make the host so indispensable that the crew takes them back to a heavily populated core-world colony to spread.",
+    "mechanics": {
+      "stats": { "combat": "N/A", "instinct": "N/A", "hits": "N/A" },
+      "special_rules": "Manic Efficiency: Infected players gain Advantage on all Speed and Intellect checks. However, if they are prevented from working or ordered into quarantine, they become violently, homicidally erratic."
+    }
+  },
+  {
+    "id": "XP-218",
+    "designation": "Localized-Biomass Aggregation | Deck-Scale Somatic Colony | Structural-Flesh Matrix | Mega-Colony Pustule | Bulkhead-Assimilation Mass",
+    "classification": {
+      "composition": "PROTEAN",
+      "vectors": ["STRUCTURAL", "KINETIC"],
+      "scale": "OVERSIZED",
+      "ral": 3,
+      "stress_profile": "VISCERAL"
+    },
+    "omens": [
+      {"desc": "Deck plating that feels strangely squishy underfoot and bleeds slightly when scratched by heavy boots."},
+      {"desc": "The ambient temperature of a specific corridor permanently resting at exactly 37°C (98.6°F)."},
+      {"desc": "Air vents that don't blow air, but rather 'breathe' with a rhythmic, wet, exhaling sound."}
+    ],
+    "forms": [
+      {
+        "name": "Biomass-Matrix",
+        "type": "Adult",
+        "description": "A massive pooling of gathered organic matter that completely coats the walls, floors, and ceilings of an entire deck."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: The final nesting stage of a massive biological swarm. It is not a distinct entity, but a structural alteration of the ship using stolen biomass. The room itself becomes the monster, sprouting defensive bone-shards, digestive acid pools, and grabbing tentacles to protect the delicate core hidden somewhere within the flesh-walls.",
+    "mechanics": {
+      "stats": { "combat": "60% (Room Attacks)", "instinct": "30%", "hits": "Special (Requires demolition)" },
+      "special_rules": "Hostile Architecture: Moving through the corridor requires a Speed Save. Failure results in 1d10 acid damage or being grappled by the floor. Conventional firearms are useless against the walls."
+    }
+  },
+  {
+    "id": "XL-227",
+    "designation": "Antiquated-Logistics Automaton | Pre-Corporate Delivery Drone | Anomalous-Courier Cylinder | Relic-Freight Unit | Epoch-Lost Messenger",
+    "classification": {
+      "composition": "LITHIC",
+      "vectors": ["INERT", "KINETIC"],
+      "scale": "HANDHELD",
+      "ral": 1,
+      "stress_profile": "ONTOLOGICAL"
+    },
+    "omens": [
+      {"desc": "A pristine, softly humming metallic cylinder rolling autonomously down a dusty, undisturbed derelict corridor."},
+      {"desc": "Short-range radio signals broadcasting polite delivery protocols in a dead language that hasn't been spoken in six centuries."},
+      {"desc": "Neatly stacked piles of heavy, vacuum-sealed packages outside a crew quarter door."}
+    ],
+    "forms": [
+      {
+        "name": "Delivery-Chassis",
+        "type": "Adult",
+        "description": "A utilitarian, heavily armored cylinder on gyroscopic treads, completely devoid of modern corporate serial numbers."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: None. This is an anomaly. We are certain these machines do not belong to any corporation that has existed in the last 600 years. They simply roam derelict space, attempting to 'deliver' heavy, sealed packages of what appears to be ancient, inert dust to anyone they encounter. They are deeply mundane, yet chronologically impossible.",
+    "mechanics": {
+      "stats": { "combat": "15%", "instinct": "10%", "hits": "5 (50) Armor: 25" },
+      "special_rules": "Aggressive Logistics: Completely non-hostile unless the crew refuses to 'accept' a package blocking a doorway. If impeded, it uses its immense mass to ram the crew (1d5 blunt damage) until the delivery is taken."
+    }
+  },
+  {
+    "id": "XL-230",
+    "designation": "Invasive-Telemetry Artifact | Subversive-Observation Mimic | Rogue-Fabricated Spyware | Iterative-Infiltration Node | Uncanny-Hardware Symbiote",
+    "classification": {
+      "composition": "LITHIC",
+      "vectors": ["OPERATIONAL", "PSYCHOLOGICAL"],
+      "scale": "SAMPLE",
+      "ral": 2,
+      "stress_profile": "CLANDESTINE"
+    },
+    "omens": [
+      {"desc": "A coffee mug or wrench that feels unusually heavy, lacks a center of gravity, and hums faintly."},
+      {"desc": "A discarded datapad where the screen and buttons aren't functional components, but are just meticulously painted onto a solid block of metal."},
+      {"desc": "Discovering a completely unrecognizable, organic-looking microchip perfectly spliced into the ship's comms array."}
+    ],
+    "forms": [
+      {
+        "name": "Iteration-Alpha",
+        "type": "Phased",
+        "description": "Crude mimicry. A solid block of plastic or metal shaped vaguely like a human tool."
+      },
+      {
+        "name": "Iteration-Omega",
+        "type": "Adult",
+        "description": "Near-perfect mechanical disguise, often functioning as the tool it mimics, but featuring tiny, unsettling biological/insectoid legs when unobserved."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: The byproduct of an unknown, rogue AI fabricator. Something out in the dark is trying to understand human technology by aggressively mimicking it. The observers blend in as mundane tools, but they are always slightly 'off.' They do not attack. They just watch, record, and transmit our tactical data into the void to perfect their next iteration.",
+    "mechanics": {
+      "stats": { "combat": "N/A", "instinct": "95%", "hits": "1" },
+      "special_rules": "Paranoia Engine: Anytime players scavenge an item, the GM rolls 1d10. On a 1, it's a Mimic. Bringing it aboard causes automated ship systems (doors, turrets) to slowly and inexplicably turn hostile over the next 1d4 days as the observer hacks them."
+    }
+  },
+  {
+    "id": "XS-236",
+    "designation": "Circadian-Disruption Insect | REM-Interference Arthropod | Cortisol-Spiking Strigiform | Wake-Cycle Parasite | Somnolence-Deprivation Bug",
+    "classification": {
+      "composition": "SOMATIC",
+      "vectors": ["PSYCHOLOGICAL", "OPERATIONAL"],
+      "scale": "SAMPLE",
+      "ral": 1,
+      "stress_profile": "CLANDESTINE"
+    },
+    "omens": [
+      {"desc": "A high-pitched, almost imperceptible ringing in the ears that only stops when you look directly at a ventilation grate."},
+      {"desc": "Normally calm crew members suddenly snapping at each other over incredibly minor infractions."},
+      {"desc": "Ship supplies of coffee, amphetamines, and medical stimulants running dry weeks ahead of schedule."}
+    ],
+    "forms": [
+      {
+        "name": "Acoustic-Nymph",
+        "type": "Adult",
+        "description": "A pale, flat, six-legged insect perfectly adapted to wedging itself deep inside air ducts."
+      }
+    ],
+    "in_universe_notes": "Ecological Niche: Evolved alongside massive, hibernating predators. It chirps at a highly specific acoustic frequency that prevents complex brains from entering Rapid Eye Movement (REM) sleep, ensuring predators never wake up hungry. On a ship, it is completely harmless physically, but induces catastrophic, maddening insomnia.",
+    "mechanics": {
+      "stats": { "combat": "N/A", "instinct": "75%", "hits": "1" },
+      "special_rules": "Sleep Deprivation: Sleeping on a deck infested with this insect grants no Stress relief. After 72 hours of exposure, players make all Intellect and Instinct checks at Disadvantage."
+    }
+  }
+]

@@ -5,17 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c7dab7c-0b60-44f4-9230-71ff9ff2ed0d" name="Changes" comment="Initial functional commit">
-      <change afterPath="$PROJECT_DIR$/resources/data/missions/inactive/CF-201_CircleTheFlame.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/data/random-generators/Wounds.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/dice.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/theme.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.aiassistant/context.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/data/entities/entities.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/repository.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.aiassistant/rules/gemini-rules.md" beforeDir="false" afterPath="$PROJECT_DIR$/.aiassistant/rules/gemini-rules.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/missions/active/AD-121_OperationAlDente.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/missions/active/AD-121_OperationAlDente.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/missions/active/BH-342_Zoomies.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/missions/active/BH-342_Zoomies.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/missions/active/REPO-073_Boobytrap.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/missions/active/REPO-073_Boobytrap.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/printer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/printer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tui.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/tui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +72,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Workspace\Python\MothershipCli\resources\data\missions\active" />
       <recent name="C:\Workspace\Python\MothershipCli\resources\data\missions\inactive" />
       <recent name="C:\Workspace\Python\MothershipCli\src" />
     </key>
@@ -136,7 +136,6 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PY-253.29346.308" />
         <option value="bundled-python-sdk-ca5e2b39c7df-6e1f45a539f7-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.29346.308" />
       </set>
     </attachedChunks>
@@ -156,7 +155,9 @@
       <workItem from="1770577653195" duration="16761000" />
       <workItem from="1770730422858" duration="4865000" />
       <workItem from="1770763464303" duration="14615000" />
-      <workItem from="1770801803950" duration="17484000" />
+      <workItem from="1770801803950" duration="23037000" />
+      <workItem from="1771808736893" duration="1500000" />
+      <workItem from="1774950887498" duration="11000" />
     </task>
     <task id="LOCAL-00001" summary="Initial functional commit">
       <option name="closed" value="true" />

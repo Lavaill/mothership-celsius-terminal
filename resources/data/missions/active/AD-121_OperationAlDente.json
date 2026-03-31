@@ -9,7 +9,7 @@
         "missionId": "AD-121",
         "missionName": "Escort vip",
         "missionPay": {
-          "text": "500",
+          "text": "1000",
           "unit": "cr"
         },
         "hazard": 1,

@@ -8,7 +8,7 @@
         "missionId": "REPO-073",
         "missionName": "Asset Recovery",
         "missionPay": {
-          "text": "1000",
+          "text": "2000",
           "unit": "cr"
         },
         "hazard": 3,

@@ -42,3 +42,7 @@ All UI elements must adhere to the "Dystopian Terminal" philosophy:
 ### **Mandatory Log Check:** 
   - If an error occurs, you MUST check `logs/mothership.log` immediately.
   - Automatically add `logger.debug()` or `logger.info()` checkpoints to any code block suspected of causing a failure.
+
+## 4. CONTEXT AWARENESS
+- **Mandatory Context Check**: Before ANY change, you MUST read `.aiassistant/context.md` to understand the current architecture and state of the project.
+- **Mandatory Context Update**: After ANY change, you MUST update `.aiassistant/context.md` to reflect the new state of the project.

@@ -6,49 +6,26 @@ import random
 from src.jsonParser import JsonParser
 from src.utils import logger
 from src.dice import DiceRoller
+from src.repository import MissionRepository, GeneratorRepository
 
 class Printer:
     def __init__(self):
         self.parser = JsonParser()
+        self.mission_repo = MissionRepository()
+        self.generator_repo = GeneratorRepository()
         self.printer_url = "http://127.0.0.1:7123/api/printTemplate"
-        self.missions_path = "data/missions/active"
-        self.inactive_missions_path = "data/missions/inactive"
-        self.fortunes_path = "data/random-generators/OxygenFortunes.json"
-        self.wounds_path = "data/random-generators/Wounds.json"
 
     def get_available_mission_ids(self):
         """
-        Returns a list of all available mission IDs from the active and inactive missions folders.
+        Returns a list of all available mission IDs from the repository.
         """
-        ids = []
-        
-        # Helper to scan a directory
-        def scan_dir(relative_path):
-            full_path = os.path.join(self.parser.resources_dir, relative_path)
-            if not os.path.exists(full_path):
-                return
-            
-            for filename in os.listdir(full_path):
-                if not filename.endswith('.json'):
-                    continue
-                    
-                file_path = os.path.join(relative_path, filename)
-                data = self.parser.read_json_file(file_path)
-                
-                if data and data.get('id'):
-                    ids.append(data.get('id'))
-
-        # Scan both active and inactive directories
-        scan_dir(self.missions_path)
-        scan_dir(self.inactive_missions_path)
-        
-        return ids
+        return self.mission_repo.get_all_mission_ids()
 
     def get_wound_types(self):
         """
-        Returns a list of available wound types.
+        Returns a list of available wound types from the repository.
         """
-        wounds_data = self.parser.read_json_file(self.wounds_path)
+        wounds_data = self.generator_repo.get_wounds_data()
         if not wounds_data or "wound-tables" not in wounds_data:
             return []
         
@@ -56,28 +33,34 @@ class Printer:
 
     def print_contract(self, mission_id):
         """
-        Finds the json file containing the mission_id and sends the contract data to the printer.
+        Finds the mission by ID and sends its contract data to the printer.
         """
         return self._print_entry(mission_id, "contract")
 
     def print_mission(self, mission_id):
         """
-        Finds the json file containing the mission_id and sends the mission data to the printer.
+        Finds the mission by ID and sends its mission data to the printer.
         """
         return self._print_entry(mission_id, "mission")
 
     def print_all_contracts(self):
         """
-        Sends all contracts in the active missions folder to the printer.
-        Does NOT include inactive missions.
+        Sends all contracts from active missions to the printer.
         """
-        return self._print_all_entries("contract")
+        active_missions = self.mission_repo.get_active_missions()
+        success_count = 0
+        for mission_data, file_path in active_missions:
+            if self._send_print_request(mission_data, file_path, "contract"):
+                success_count += 1
+        
+        logger.info(f"Sent {success_count}/{len(active_missions)} contracts to printer.")
+        return success_count > 0
 
     def print_oxygen_bill(self):
         """
         Sends an oxygen bill to the printer with a random quote.
         """
-        fortunes = self.parser.read_json_file(self.fortunes_path)
+        fortunes = self.generator_repo.get_fortunes_data()
         if not fortunes or not isinstance(fortunes, list):
             logger.error("Error: Could not read oxygen fortunes.")
             return False
@@ -120,7 +103,7 @@ class Printer:
         """
         Generates and prints a wound card.
         """
-        wounds_data = self.parser.read_json_file(self.wounds_path)
+        wounds_data = self.generator_repo.get_wounds_data()
         if not wounds_data:
             logger.error("Error: Could not read wounds data.")
             return False
@@ -188,60 +171,17 @@ class Printer:
             return False
 
     def _print_entry(self, mission_id, entry_type):
-        # Search in both active and inactive folders
-        search_paths = [self.missions_path, self.inactive_missions_path]
-        target_file = None
+        mission_data, file_path = self.mission_repo.find_mission_by_id(mission_id)
         
-        for base_path in search_paths:
-            full_path = os.path.join(self.parser.resources_dir, base_path)
-            if not os.path.exists(full_path):
-                continue
-                
-            for filename in os.listdir(full_path):
-                if not filename.endswith('.json'):
-                    continue
-                    
-                file_path = os.path.join(base_path, filename)
-                data = self.parser.read_json_file(file_path)
-                
-                if data and data.get('id') == mission_id:
-                    target_file = file_path
-                    break
-            
-            if target_file:
-                break
-        
-        if not target_file:
+        if not mission_data:
             logger.error(f"Error: No mission file found for ID {mission_id}")
             return False
 
-        return self._send_print_request(target_file, entry_type)
+        return self._send_print_request(mission_data, file_path, entry_type)
 
-    def _print_all_entries(self, entry_type):
-        # Only prints from the active missions path
-        full_missions_path = os.path.join(self.parser.resources_dir, self.missions_path)
-        
-        if not os.path.exists(full_missions_path):
-            logger.error(f"Error: Missions directory not found at {full_missions_path}")
-            return False
-
-        success_count = 0
-        files = [f for f in os.listdir(full_missions_path) if f.endswith('.json')]
-        
-        for filename in files:
-            if self._send_print_request(os.path.join(self.missions_path, filename), entry_type):
-                success_count += 1
-        
-        logger.info(f"Sent {success_count}/{len(files)} {entry_type}s to printer.")
-        return success_count > 0
-
-    def _send_print_request(self, relative_file_path, entry_type):
-        data = self.parser.read_json_file(relative_file_path)
-        if not data:
-            return False
-            
+    def _send_print_request(self, mission_data, file_path, entry_type):
         # Find the entry with the matching type
-        entries = data.get('entries', [])
+        entries = mission_data.get('entries', [])
         target_entry = None
         for entry in entries:
             if entry.get('type') == entry_type:
@@ -249,7 +189,7 @@ class Printer:
                 break
         
         if not target_entry:
-            logger.error(f"Error: No {entry_type} data found in {relative_file_path}")
+            logger.error(f"Error: No {entry_type} data found in {file_path}")
             return False
 
         # Construct the payload based on entry type
@@ -281,24 +221,24 @@ class Printer:
             data = json.dumps(payload).encode('utf-8')
             req = urllib.request.Request(self.printer_url, data=data, headers={'Content-Type': 'application/json'})
             
-            logger.debug(f"Sending {entry_type} from {relative_file_path} to printer...")
+            logger.debug(f"Sending {entry_type} from {file_path} to printer...")
             logger.info(f"Sending {entry_type} to printer...")
             
             with urllib.request.urlopen(req, timeout=10) as response:
                 if response.getcode() == 200:
-                    logger.debug(f"Successfully sent {entry_type} from {relative_file_path} to printer.")
+                    logger.debug(f"Successfully sent {entry_type} from {file_path} to printer.")
                     logger.info(f"Successfully sent {entry_type} to printer.")
                     return True
                 else:
-                    logger.debug(f"Failed to print {entry_type} from {relative_file_path}. Status: {response.getcode()}")
+                    logger.debug(f"Failed to print {entry_type} from {file_path}. Status: {response.getcode()}")
                     logger.error(f"Failed to print {entry_type}. Status: {response.getcode()}")
                     return False
         except urllib.error.HTTPError as e:
-            logger.debug(f"Failed to print {entry_type} from {relative_file_path}. Status: {e.code}, Response: {e.read().decode('utf-8')}")
+            logger.debug(f"Failed to print {entry_type} from {file_path}. Status: {e.code}, Response: {e.read().decode('utf-8')}")
             logger.error(f"Failed to print {entry_type}. Status: {e.code}")
             return False
         except Exception as e:
-            logger.error(f"Connection error printing {relative_file_path}: {e}")
+            logger.error(f"Connection error printing {file_path}: {e}")
             return False
 
 logger.info("Initializing Printer Service...")
