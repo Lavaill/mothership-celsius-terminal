@@ -35,9 +35,18 @@ This document outlines the architecture, features, and core components of the Mo
 - **`theme.py`**: Aesthetic configuration and CSS generation.
 - **`server.py`**: FastAPI-based (or similar) HTTP API.
 
+### `resources/templates`
+- **`Mission-Template.md`**: Markdown template for Obsidian missions.
+- **`Entity-Template.md`**: Markdown template for Obsidian entities.
+- **`Mission-Template.json`**: JSON template for mission data structures.
+- **`Entity-Template.json`**: JSON template for entity data structures.
+
 ## 3. Architectural TODOs
 
 - **[DONE] Refactor to Domain-Driven Structure**: Project reorganized into the `mothership` package.
+- **[DONE] Define Obsidian Mission Template**: New Markdown-based template created in `resources/data/templates/Mission-Template.md`.
+- **[DONE] Create JSON Data Templates**: Standardized JSON templates for Missions and Entities added to `resources/templates/`.
+- **[DONE] Implement Mission Markdown Parser**: Created `mothership.data.markdown_parser` with an extensible base class and a `MissionMarkdownParser` implementation, verified with tests.
+- **[TODO] Implement Entity Markdown Parser**: Create a concrete parser for the new Entity Markdown template.
 - **[TODO] Implement Obsidian Vault Uplink (In-Memory Registry + Shadow Cache)**:
-    - Implement Markdown parser in `mothership.data`.
     - Implement Sync logic in `mothership.services.obsidian_service`.

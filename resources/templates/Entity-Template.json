@@ -1,0 +1,35 @@
+{
+  "id": "ID-XXX",
+  "designation": "Designation Name | Alternative Name | Descriptive Alias",
+  "classification": {
+    "composition": "PROTEAN/SOMATIC/LITHIC/OTHER",
+    "vectors": [
+      "PARASITIC/KINETIC/PSYCHOLOGICAL/STRUCTURAL/OPERATIONAL/INERT"
+    ],
+    "scale": "SAMPLE/HANDHELD/STANDARD/OVERSIZED/SOVEREIGN",
+    "ral": 0,
+    "stress_profile": "NEUTRAL/VISCERAL/CLANDESTINE/ONTOLOGICAL"
+  },
+  "omens": [
+    "First sensory sign or hint of presence.",
+    "Second environmental clue or warning.",
+    "Final escalation indicator before direct encounter."
+  ],
+  "forms": [
+    {
+      "name": "Form Name (e.g., Larva, Adult, Spore)",
+      "type": "Phased/Adult/Static",
+      "description": "Visual and functional description of this life-stage or form."
+    }
+  ],
+  "in_universe_notes": "Lore, ecological niche, behaviors, and in-universe observations.",
+  "mechanics": {
+    "stats": {
+      "combat": "00%",
+      "instinct": "00%",
+      "hits": "0 (00)",
+      "armor": "00"
+    },
+    "special_rules": "Specific mechanical rules, unique abilities, and game-play effects."
+  }
+}

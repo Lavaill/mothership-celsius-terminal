@@ -548,7 +548,7 @@ class MothershipApp(App):
                 mothership_service.print_all_contracts()
             elif sub == "CONTRACT" and len(args) > 1:
                 # args[1] is the ID. We assume the user might type lowercase, but files might be upper.
-                # printer_service expects exact match. Let's try upper.
+                # mothership_service expects exact match. Let's try upper.
                 mothership_service.print_contract(args[1].upper()) 
             elif sub == "MISSION" and len(args) > 1:
                 mothership_service.print_mission(args[1].upper())

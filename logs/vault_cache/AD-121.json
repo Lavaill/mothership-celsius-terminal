@@ -1,0 +1,86 @@
+{
+  "id": "AD-121",
+  "entries": [
+    {
+      "type": "contract",
+      "data": {
+        "client": "Rossi N",
+        "missionDescription": "VIP requires transport. Heavy equipment and potential industrial espionage to be expected.",
+        "missionId": "AD-121",
+        "missionName": "Escort VIP",
+        "missionPay": {
+          "text": "1000",
+          "unit": "cr"
+        },
+        "hazard": 1,
+        "objectives": [
+          {
+            "objective": "Deliver VIP",
+            "pay": "MDT"
+          },
+          {
+            "objective": "Transport equipment",
+            "pay": "MDT"
+          }
+        ],
+        "params": [
+          {
+            "checkbox": "[ ]",
+            "name": "NDA",
+            "info": "Non-Disclosure Agreement"
+          },
+          {
+            "checkbox": "[x]",
+            "name": "JUMPS",
+            "info": "Mandatory"
+          },
+          {
+            "checkbox": "[ ]",
+            "name": "SALVAGE",
+            "info": ""
+          }
+        ],
+        "warnings": [
+          {
+            "text": "Free Pasta"
+          }
+        ]
+      }
+    },
+    {
+      "type": "mission",
+      "data": {
+        "id": "AD-121",
+        "title": "Operation Al Dente",
+        "summary": "Nonna Rossi is relocating her trattoria.",
+        "location": "Transit Corridor G-4",
+        "locationRef": "Page 12",
+        "cast": [
+          {
+            "name": "Nonna Rossi",
+            "tagline": "Indomitable Matriarch",
+            "quirk": "Feeds anyone",
+            "want": "To keep the ravioli from overcooking."
+          },
+          {
+            "name": "The Iron Press",
+            "tagline": "2-Ton Antique Machine",
+            "quirk": "BIFL",
+            "want": "To drift blindly."
+          }
+        ],
+        "scenes": [
+          {
+            "desc": "The gravity plating fails."
+          }
+        ],
+        "rewards": [
+          {
+            "type": "Contact",
+            "desc": "Nonna Rossi. Infinite Pasta"
+          }
+        ]
+      }
+    }
+  ]
+}

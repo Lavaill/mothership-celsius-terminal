@@ -35,6 +35,7 @@ To ensure architectural consistency across sessions, the following loop is **MAN
     - If a failure occurs, check `logs/mothership.log` immediately.
     - Proactively add `logger.debug()` checkpoints in new or modified logic.
 - **Testing**: **EXEMPTED.** Do not attempt to run automated tests at this stage due to physical printer side-effects. Manual verification is the current standard.
+- **Process Management**: **MANDATORY.** Always terminate all background processes, including server threads (e.g., port 8000), immediately after verification or testing is complete. Do not leave persistent processes running unless explicitly requested by the user.
 
 ---
 

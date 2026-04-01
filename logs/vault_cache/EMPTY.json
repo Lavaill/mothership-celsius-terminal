@@ -1,0 +1,35 @@
+{
+  "id": "EMPTY",
+  "entries": [
+    {
+      "type": "contract",
+      "data": {
+        "client": "UNKNOWN",
+        "missionDescription": "",
+        "missionId": "EMPTY",
+        "missionName": "UNKNOWN",
+        "missionPay": {
+          "text": "0",
+          "unit": "cr"
+        },
+        "hazard": 1,
+        "objectives": [],
+        "params": [],
+        "warnings": []
+      }
+    },
+    {
+      "type": "mission",
+      "data": {
+        "id": "EMPTY",
+        "title": "UNKNOWN",
+        "summary": "",
+        "location": "",
+        "locationRef": "",
+        "cast": [],
+        "scenes": [],
+        "rewards": []
+      }
+    }
+  ]
+}

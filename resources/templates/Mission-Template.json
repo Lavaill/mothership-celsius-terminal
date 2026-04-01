@@ -1,0 +1,81 @@
+{
+  "id": "ID-XXX",
+  "entries": [
+    {
+      "type": "contract",
+      "data": {
+        "client": "Client Name",
+        "missionDescription": "Detailed description of the contract and objectives.",
+        "missionId": "ID-XXX",
+        "missionName": "Mission Name",
+        "missionPay": {
+          "text": "0000",
+          "unit": "cr"
+        },
+        "hazard": 1,
+        "objectives": [
+          {
+            "objective": "Primary Objective",
+            "pay": "MDT"
+          }
+        ],
+        "params": [
+          {
+            "checkbox": "[ ]",
+            "info": "",
+            "name": "NDA"
+          },
+          {
+            "checkbox": "[ ]",
+            "info": "",
+            "name": "JUMPS"
+          },
+          {
+            "checkbox": "[ ]",
+            "info": "",
+            "name": "SALVAGE"
+          },
+          {
+            "checkbox": "[ ]",
+            "info": "",
+            "name": "EVAC"
+          }
+        ],
+        "warnings": [
+          {
+            "text": "Warning or flavor text here."
+          }
+        ]
+      }
+    },
+    {
+      "type": "mission",
+      "data": {
+        "id": "ID-XXX",
+        "title": "Mission Title",
+        "summary": "Short summary of the mission's plot and challenges.",
+        "location": "Primary Location Details",
+        "locationRef": "Reference ID or short name",
+        "cast": [
+          {
+            "name": "NPC Name",
+            "tagline": "Short description of the NPC",
+            "quirk": "Notable personality trait",
+            "want": "The NPC's primary motivation"
+          }
+        ],
+        "scenes": [
+          {
+            "desc": "Description of a key scene or encounter."
+          }
+        ],
+        "rewards": [
+          {
+            "type": "Reward Type (e.g., Contact, Item, Credit)",
+            "desc": "Description of the reward."
+          }
+        ]
+      }
+    }
+  ]
+}
