@@ -168,7 +168,7 @@ class MissionMarkdownParser(MarkdownParser):
         return {
             "client": frontmatter.get("contract-client", "UNKNOWN"),
             "missionDescription": sub_sections.get("DESCRIPTION", "").strip(),
-            "missionId": frontmatter.get("id", "UNKNOWN"),
+            "id": frontmatter.get("id", "UNKNOWN"),
             "missionName": frontmatter.get("contract-title", "UNKNOWN"),
             "missionPay": {
                 "text": pay_text,

@@ -6,7 +6,7 @@
       "data": {
         "client": "<span class='redacted'>Van Doren</span>",
         "missionDescription": "Immediate containment required for Biological Asset <span class='redacted'>Vega</span>. Asset has breached confinement. Warning: Asset possesses <span class='redacted'>razor-sharp claws</span> and <span class='redacted'>sneaking</span> capabilities. Previous handler <span class='redacted'>on sick leave</span>.",
-        "missionId": "BH-342",
+        "id": "BH-342",
         "missionName": "<span class='redacted'>Biological containment</span>",
         "missionPay": {
           "text": "4000",

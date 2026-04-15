@@ -8,7 +8,8 @@ import asyncio
 import os
 import math
 import sys
-from mothership.core.app import worker
+import time
+from mothership.core.app import timer_manager
 from mothership.services.facade import mothership_service
 from mothership.core.utils import logger
 from mothership.ui.theme import THEMES, TYPE_DELAY, LINE_DELAY
@@ -61,7 +62,7 @@ def get_completions(value: str) -> list[str]:
     # Do NOT strip the value, as trailing spaces are significant for parsing arguments
     value_lower = value.lower()
     
-    commands = ['start', 'stop', 'status', 'print', 'check', 'theme', 'wound', 'exit']
+    commands = ['start', 'stop', 'print', 'theme', 'exit']
     
     # Level 1: Top-level commands
     # If there are no spaces, we are still typing the command
@@ -69,48 +70,47 @@ def get_completions(value: str) -> list[str]:
         return [c for c in commands if c.startswith(value_lower)]
     
     # Level 2: Subcommands
-    if value_lower.startswith('print'):
-        parts = value_lower.split(' ')
-        
-        # If we have exactly 2 parts, we are typing the subcommand
-        # "print " -> parts=['print', '']
-        # "print c" -> parts=['print', 'c']
+    parts = value_lower.split(' ')
+    prefix = parts[1] if len(parts) > 1 else ""
+
+    if value_lower.startswith('start') or value_lower.startswith('stop'):
         if len(parts) == 2:
-            prefix = parts[1]
-            subcommands = ['contract', 'all-contracts', 'mission', 'oxygen']
+            timer_names = mothership_service.get_timer_names()
+            matches = [t for t in timer_names if t.startswith(prefix)]
+            return [f"{parts[0]} {m}" for m in matches]
+    
+    if value_lower.startswith('print'):
+        # If we have exactly 2 parts, we are typing the subcommand
+        if len(parts) == 2:
+            subcommands = ['contract', 'all-contracts', 'mission', 'oxygen', 'wound']
             matches = [s for s in subcommands if s.startswith(prefix)]
             return [f"print {m}" for m in matches]
         
-        # Level 3: IDs
-        # "print contract " -> parts=['print', 'contract', '']
+        # Level 3: IDs or Wound Types
         if len(parts) >= 3:
             subcmd = parts[1]
             if subcmd in ['contract', 'mission']:
                 typed_id = parts[2]
                 ids = mothership_service.get_available_mission_ids()
-                # IDs are data, so we keep them as returned (likely upper), but match lower
                 return [f"print {subcmd} {mid}" for mid in ids if mid.lower().startswith(typed_id)]
+            
+            if subcmd == 'wound':
+                typed_type = parts[2]
+                wound_types = mothership_service.get_wound_types()
+                matches = [w for w in wound_types if w.lower().startswith(typed_type)]
+                
+                # If we have 4 parts, suggest numbers 1-10
+                if len(parts) == 4:
+                    typed_num = parts[3]
+                    numbers = [str(i) for i in range(1, 11)]
+                    return [f"print wound {parts[2]} {n}" for n in numbers if n.startswith(typed_num)]
+                    
+                return [f"print wound {m}" for m in matches]
     
-    # Level 2: Theme Subcommands
     if value_lower.startswith('theme'):
-        parts = value_lower.split(' ')
         if len(parts) == 2:
-            prefix = parts[1]
             theme_names = list(THEMES.keys())
             return [f"theme {t}" for t in theme_names if t.startswith(prefix)]
-
-    # Level 2: Wound Subcommands
-    if value_lower.startswith('wound'):
-        parts = value_lower.split(' ')
-        if len(parts) == 2:
-            prefix = parts[1]
-            wound_types = mothership_service.get_wound_types()
-            return [f"wound {w}" for w in wound_types if w.lower().startswith(prefix)]
-        if len(parts) == 3:
-            # Suggest numbers 1-10
-            prefix = parts[2]
-            numbers = [str(i) for i in range(1, 11)]
-            return [f"wound {parts[1]} {n}" for n in numbers if n.startswith(prefix)]
 
     return []
 
@@ -398,9 +398,9 @@ class MothershipApp(App):
         sec_color = self.theme_data["secondary"]
         self.write_to_console(f"[{sec_color}]{options_str}[/{sec_color}]\n")
 
-    def get_simple_bar_ascii(self, percent: float) -> str:
+    def get_simple_bar_ascii(self, percent: float, remaining_secs: float) -> str:
         """
-        Generates a simple filling bar animation.
+        Generates a simple filling bar animation with a countdown.
         """
         p = max(0.0, min(1.0, percent))
         width = 20
@@ -409,28 +409,39 @@ class MothershipApp(App):
         # Simple bar characters
         bar = "█" * filled + "░" * (width - filled)
         
-        return f"\n\n[{bar}]\n   {int(p*100)}%"
+        # Format remaining time
+        if remaining_secs > 0:
+            mins = int(remaining_secs // 60)
+            secs = int(remaining_secs % 60)
+            time_str = f"{mins:02d}:{secs:02d}"
+        else:
+            time_str = "00:00"
+        
+        return f"\n\n[{bar}]\n   {int(p*100)}% - {time_str}"
 
     def update_status_panel(self) -> None:
         try:
+            # For now, display the oxygen-timer as the primary visible timer
+            worker = timer_manager.get("oxygen-timer")
+            if not worker:
+                return
+
             # Update State Text
-            state = "ACTIVE" if worker.is_running else "OFFLINE"
-            
-            # Add wave effect to the status text if running
             if worker.is_running:
+                state = "ACTIVE"
                 wave_chars = ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█", "▇", "▆", "▅", "▄", "▃", "▁"]
                 t = time.time() * 10
                 wave_idx = int(t) % len(wave_chars)
                 wave = wave_chars[wave_idx]
                 state_display = f"{state} {wave}"
             else:
-                state_display = state
+                state_display = "OFFLINE"
 
             self.query_one("#timer-state-text").update(f"STATE: {state_display}")
             self.query_one("#timer-interval-text").update(f"INT: {worker.interval}m")
 
-            # Update Visual - Using Simple Bar
-            art = self.get_simple_bar_ascii(worker.progress)
+            # Update Visual - Using Simple Bar with remaining time
+            art = self.get_simple_bar_ascii(worker.progress, worker.remaining_seconds)
             self.query_one("#timer-visual").update(art)
 
         except Exception as e:
@@ -478,30 +489,50 @@ class MothershipApp(App):
 
             if cmd == "exit":
                 self.write_to_console(f"[{sec_color}]Terminating uplink session...[/{sec_color}]\n")
-                worker.stop()
+                # Stop all registered timers
+                for name in timer_manager.list_names():
+                    worker = timer_manager.get(name)
+                    if worker: worker.stop()
                 self.exit()
             elif cmd == "start":
-                interval = args[0] if len(args) > 0 else None
+                if not args:
+                    self.write_to_console(f"[{sec_color}]Usage: start <timer-name> [interval][/{sec_color}]\n")
+                    return
+                
+                timer_name = args[0].lower()
+                interval = args[1] if len(args) > 1 else None
+                worker = timer_manager.get(timer_name)
+                
+                if not worker:
+                    self.write_to_console(f"[bold red]ERROR: Unknown timer '{timer_name}'.[/]\n")
+                    return
+
                 if worker.start(interval):
-                    self.write_to_console(f"[{sec_color}]Timer started (Interval: {worker.interval}m).[/{sec_color}]\n")
-                    # FIX: Call _update_network_log_ui directly since we are in the main thread
-                    self._update_network_log_ui("LOCAL: TIMER START")
+                    self.write_to_console(f"[{sec_color}]Timer '{timer_name}' started (Interval: {worker.interval}m).[/{sec_color}]\n")
+                    self._update_network_log_ui(f"LOCAL: {timer_name.upper()} START")
                 else:
-                    self.write_to_console(f"[bold red]ERROR: Timer already active or invalid interval.[/]\n")
+                    self.write_to_console(f"[bold red]ERROR: Timer '{timer_name}' already active or invalid interval.[/]\n")
+
             elif cmd == "stop":
+                if not args:
+                    self.write_to_console(f"[{sec_color}]Usage: stop <timer-name>[/{sec_color}]\n")
+                    return
+                
+                timer_name = args[0].lower()
+                worker = timer_manager.get(timer_name)
+                
+                if not worker:
+                    self.write_to_console(f"[bold red]ERROR: Unknown timer '{timer_name}'.[/]\n")
+                    return
+
                 if worker.stop():
-                    self.write_to_console(f"[{sec_color}]Timer stopped.[/{sec_color}]\n")
-                    # FIX: Call _update_network_log_ui directly since we are in the main thread
-                    self._update_network_log_ui("LOCAL: TIMER STOP")
+                    self.write_to_console(f"[{sec_color}]Timer '{timer_name}' stopped.[/{sec_color}]\n")
+                    self._update_network_log_ui(f"LOCAL: {timer_name.upper()} STOP")
                 else:
-                    self.write_to_console(f"[{sec_color}]Timer is not currently active.[/{sec_color}]\n")
-            elif cmd == "status":
-                self.update_status_panel()
-                self.write_to_console(f"[{sec_color}]Status report updated.[/{sec_color}]\n")
+                    self.write_to_console(f"[{sec_color}]Timer '{timer_name}' is not currently active.[/{sec_color}]\n")
+
             elif cmd == "print":
                 await self.handle_print_command(args)
-            elif cmd == "check":
-                self.write_to_console(f"[{sec_color}]DIAGNOSTIC: KERNEL OPTIMIZED. MEMORY LEAKS: 0. UPLINK STABLE.[/{sec_color}]\n")
             elif cmd == "theme":
                 if len(args) > 0:
                     new_theme = args[0].lower()
@@ -511,10 +542,8 @@ class MothershipApp(App):
                         self.write_to_console(f"[{sec_color}]Unknown theme: {new_theme}[/{sec_color}]\n")
                 else:
                     self.write_to_console(f"[{sec_color}]Usage: theme [mothership|prospero|helios|astra|parallax][/{sec_color}]\n")
-            elif cmd == "wound":
-                await self.handle_wound_command(args)
             else:
-                self.write_to_console(f"[{sec_color}]Unknown command. Try 'start', 'print', 'check', 'theme', 'wound', or 'exit'.[/{sec_color}]\n")
+                self.write_to_console(f"[{sec_color}]Unknown command. Try 'start', 'stop', 'print', 'theme', or 'exit'.[/{sec_color}]\n")
         except Exception as e:
             logger.error(f"Command failed: {command}", exc_info=True)
             self.write_to_console(f"[bold red]ERROR: {e}[/]\n")
@@ -522,23 +551,23 @@ class MothershipApp(App):
     async def handle_print_command(self, args):
         sec_color = self.theme_data["secondary"]
         if not args:
-            self.write_to_console(f"[{sec_color}]Usage: print [contract|mission|oxygen] {id}[/{sec_color}]\n")
+            self.write_to_console(f"[{sec_color}]Usage: print [contract|mission|oxygen|wound] {id}[/{sec_color}]\n")
             return
-        sub = args[0].upper() # Keep upper for backend logic if needed, or convert as required
+        
+        sub = args[0].upper()
+        
+        if sub == "WOUND":
+            if len(args) < 2:
+                self.write_to_console(f"[{sec_color}]Usage: print wound [type] [optional: number][/{sec_color}]\n")
+                return
+            wound_type = args[1]
+            wound_number = args[2] if len(args) > 2 else None
+            self.write_to_console(f"[{sec_color}]Processing wound report...[/{sec_color}]\n")
+            self.run_wound_task(wound_type, wound_number)
+            return
+
         self.write_to_console(f"[{sec_color}]Print request for {sub.lower()} queued.[/{sec_color}]\n")
         self.run_print_task(sub, args)
-
-    async def handle_wound_command(self, args):
-        sec_color = self.theme_data["secondary"]
-        if not args:
-            self.write_to_console(f"[{sec_color}]Usage: wound [type] [optional: number][/{sec_color}]\n")
-            return
-        
-        wound_type = args[0]
-        wound_number = args[1] if len(args) > 1 else None
-        
-        self.write_to_console(f"[{sec_color}]Processing wound report...[/{sec_color}]\n")
-        self.run_wound_task(wound_type, wound_number)
 
     @work(exclusive=True, thread=True)
     def run_print_task(self, sub, args):
@@ -547,8 +576,6 @@ class MothershipApp(App):
             if sub == "ALL-CONTRACTS":
                 mothership_service.print_all_contracts()
             elif sub == "CONTRACT" and len(args) > 1:
-                # args[1] is the ID. We assume the user might type lowercase, but files might be upper.
-                # mothership_service expects exact match. Let's try upper.
                 mothership_service.print_contract(args[1].upper()) 
             elif sub == "MISSION" and len(args) > 1:
                 mothership_service.print_mission(args[1].upper())
@@ -569,3 +596,4 @@ class MothershipApp(App):
                 self.call_from_thread(self.write_to_console, f"[{sec_color}]Failed to print wound report. Check logs.[/{sec_color}]\n")
         except Exception as e:
             logger.error(f"Wound task failed", exc_info=True)
+

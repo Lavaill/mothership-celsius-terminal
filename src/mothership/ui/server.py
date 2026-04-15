@@ -4,38 +4,56 @@ import json
 import os
 import signal
 
-from mothership.core.app import worker
+from mothership.core.app import timer_manager
 from mothership.core.utils import logger
 from mothership.services.facade import mothership_service
 
 class GameRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
-        # Parse URL: /start?interval=10
+        # Parse URL: /start?timer=oxygen-timer&interval=10
         parsed = urlparse(self.path)
         params = parse_qs(parsed.query)
 
         response_msg = "OK"
         status_code = 200
 
+        # Default timer for backward compatibility
+        timer_name = params.get('timer', ['oxygen-timer'])[0]
+        worker = timer_manager.get(timer_name)
+
         if parsed.path == '/start':
-            interval = params.get('interval', [None])[0]
-            api_url = params.get('api_url', [None])[0]
-            success = worker.start(interval, api_url)
-            response_msg = "Timer started" if success else "Timer already running"
+            if not worker:
+                status_code = 404
+                response_msg = f"Timer '{timer_name}' not found"
+            else:
+                interval = params.get('interval', [None])[0]
+                api_url = params.get('api_url', [None])[0]
+                success = worker.start(interval, api_url)
+                response_msg = f"Timer '{timer_name}' started" if success else f"Timer '{timer_name}' already running"
 
         elif parsed.path == '/stop':
-            success = worker.stop()
-            response_msg = "Timer stopped" if success else "Timer not running"
+            if not worker:
+                status_code = 404
+                response_msg = f"Timer '{timer_name}' not found"
+            else:
+                success = worker.stop()
+                response_msg = f"Timer '{timer_name}' stopped" if success else f"Timer '{timer_name}' not running"
 
         elif parsed.path == '/status':
-            state = "Running" if worker.is_running else "Stopped"
-            # Return JSON for status to be more useful for API consumers
-            status_data = {
-                "state": state,
-                "interval": worker.interval,
-                "progress": round(worker.progress, 2)
-            }
-            response_msg = json.dumps(status_data)
+            if not worker:
+                status_code = 404
+                response_msg = json.dumps({"error": f"Timer '{timer_name}' not found"})
+            else:
+                state = "Running" if worker.is_running else "Stopped"
+                # Return JSON for status to be more useful for API consumers
+                status_data = {
+                    "timer": timer_name,
+                    "state": state,
+                    "interval": worker.interval,
+                    "progress": round(worker.progress, 2),
+                    "remaining": round(worker.remaining_seconds, 2)
+                }
+                response_msg = json.dumps(status_data)
             self.send_header('Content-type', 'application/json')
 
         elif parsed.path == '/exit':
@@ -45,14 +63,15 @@ class GameRequestHandler(BaseHTTPRequestHandler):
             self.send_header('Content-type', 'text/plain')
             self.end_headers()
             self.wfile.write(response_msg.encode())
-            
+
             # Shutdown logic
-            worker.stop()
+            for name in timer_manager.list_names():
+                w = timer_manager.get(name)
+                if w: w.stop()
             logger.info("System exit requested via API.")
             # Send SIGINT to the main process to trigger a clean exit
             os.kill(os.getpid(), signal.SIGINT)
             return
-
         elif parsed.path == '/print/contracts':
             # API endpoint to print all contracts
             # Example: GET /print/contracts

@@ -6,7 +6,7 @@
       "data": {
         "client": "Client Name",
         "missionDescription": "Detailed description of the contract and objectives.",
-        "missionId": "ID-XXX",
+        "id": "ID-XXX",
         "missionName": "Mission Name",
         "missionPay": {
           "text": "0000",

@@ -5,16 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c7dab7c-0b60-44f4-9230-71ff9ff2ed0d" name="Changes" comment="Initial functional commit">
-      <change afterPath="$PROJECT_DIR$/resources/templates/Mission-Template.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.aiassistant/context.md" beforeDir="false" afterPath="$PROJECT_DIR$/.aiassistant/context.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.aiassistant/rules/gemini-rules.md" beforeDir="false" afterPath="$PROJECT_DIR$/.aiassistant/rules/gemini-rules.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GEMINI.md" beforeDir="false" afterPath="$PROJECT_DIR$/GEMINI.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/entities/entities.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/sample-call.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/templates/sample-call.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/templates/AD-121_OperationAlDente.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/templates/Mission-Template.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mothership/ui/tui.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/mothership/ui/tui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/vault_cache/AD-121.json" beforeDir="false" afterPath="$PROJECT_DIR$/logs/vault_cache/AD-121.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/vault_cache/EMPTY.json" beforeDir="false" afterPath="$PROJECT_DIR$/logs/vault_cache/EMPTY.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/missions/active/AD-121_OperationAlDente.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/missions/inactive/AD-121_OperationAlDente.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/missions/active/BH-342_Zoomies.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/missions/inactive/BH-342_Zoomies.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/missions/active/REPO-073_Boobytrap.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/missions/inactive/REPO-073_Boobytrap.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/missions/inactive/CF-201_CircleTheFlame.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/missions/active/CF-201_CircleTheFlame.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/templates/Mission-Template.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/templates/Mission-Template.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mothership/data/markdown_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/mothership/data/markdown_parser.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,9 +72,9 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Workspace\Python\MothershipCli\resources\templates" />
-      <recent name="C:\Workspace\Python\MothershipCli\resources\data\missions\active" />
       <recent name="C:\Workspace\Python\MothershipCli\resources\data\missions\inactive" />
+      <recent name="C:\Workspace\Python\MothershipCli\resources\data\missions\active" />
+      <recent name="C:\Workspace\Python\MothershipCli\resources\templates" />
       <recent name="C:\Workspace\Python\MothershipCli\src" />
     </key>
   </component>

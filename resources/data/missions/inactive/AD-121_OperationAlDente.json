@@ -6,7 +6,7 @@
       "data": {
         "client": "Rossi N",
         "missionDescription": "VIP requires transport. Heavy equipment and potential industrial espionage to be expected. Biological entity <span class='redacted'>redacted</span> requires special protection, additional incentive provided.",
-        "missionId": "AD-121",
+        "id": "AD-121",
         "missionName": "Escort vip",
         "missionPay": {
           "text": "1000",
@@ -68,7 +68,7 @@
           {
             "name": "Nonna Rossi",
             "tagline": "Indomitable Matriarch",
-            "quirk": "Feeds anyone",
+            "quirk": "Nobody goes hungry, everybody pays",
             "want": "To keep the ravioli from overcooking, regardless of physics."
           },
           {
@@ -80,13 +80,13 @@
         ],
         "scenes": [
           {
-            "desc": "The gravity plating fails. Nonna tries to catch her ravioli while the press is drifting toward a gas line."
+            "desc": "The gravity plating fails. Nonna tries to catch her ravioli while the press is drifting towards a gasline."
           }
         ],
         "rewards": [
           {
             "type": "Contact",
-            "desc": "Nonna Rossi. Infinite Pasta"
+            "desc": "Nonna Rossi. Infinite Pasta and high-society gossip."
           }
         ]
       }

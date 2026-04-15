@@ -2,6 +2,7 @@ from .wound_service import WoundService
 from .mission_service import MissionService
 from .billing_service import BillingService
 from .obsidian_service import ObsidianService
+from mothership.core.app import timer_manager
 
 class MothershipService:
     """
@@ -14,6 +15,10 @@ class MothershipService:
         self.billing = BillingService()
         self.obsidian = ObsidianService()
 
+        # Initialize named Timer Worker
+        oxygen_worker = timer_manager.register("oxygen-timer", interval=20)
+        oxygen_worker.set_task(self.print_oxygen_bill)
+
     # --- Discovery Methods (for Autocomplete) ---
     def get_available_mission_ids(self):
         # Combine local mission IDs and Obsidian mission IDs
@@ -23,6 +28,9 @@ class MothershipService:
 
     def get_wound_types(self):
         return self.wounds.get_wound_types()
+
+    def get_timer_names(self):
+        return timer_manager.list_names()
 
     def sync_vault(self):
         """Uplink sync with external Obsidian Vault."""

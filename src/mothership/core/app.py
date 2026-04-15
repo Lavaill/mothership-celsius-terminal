@@ -1,7 +1,6 @@
 import threading
 import time
 from mothership.core.utils import logger
-from mothership.services.facade import mothership_service
 
 class ApiWorker:
     def __init__(self):
@@ -12,50 +11,64 @@ class ApiWorker:
         self.api_url = None # Placeholder if we want to make the URL configurable later
         self.start_time = 0
         self.total_seconds = 0
+        self.next_trigger_time = 0
+        self.remaining_on_stop = 0
+        self._task_callback = None
+
+    def set_task(self, callback):
+        """Sets the function to be executed when the timer ticks."""
+        self._task_callback = callback
+
+    @property
+    def remaining_seconds(self) -> float:
+        if not self.is_running:
+            return self.remaining_on_stop
+        if self.next_trigger_time == 0:
+            return 0.0
+        return max(0.0, self.next_trigger_time - time.time())
 
     @property
     def progress(self) -> float:
-        if not self.is_running or self.total_seconds == 0:
+        if self.total_seconds <= 0:
             return 0.0
-        elapsed = time.time() - self.start_time
-        # Modulo to handle the loop nature
-        # Actually, the loop resets start_time every iteration.
-        # But we need to handle the case where we are waiting.
-        return min(elapsed / self.total_seconds, 1.0)
+        
+        # If running and next_trigger_time is 0, we are in the middle of a task
+        if self.is_running and self.next_trigger_time == 0:
+            return 1.0
+            
+        rem = self.remaining_seconds
+        elapsed = self.total_seconds - rem
+        return min(max(0.0, elapsed / self.total_seconds), 1.0)
 
     def _run_loop(self):
         logger.log(f"Timer started. Interval: {self.interval}m")
         self.total_seconds = self.interval * 60
-        self.is_running = True
 
-        while not self._stop_event.is_set():
-            self.start_time = time.time()
-            
-            # Granular wait to allow for progress tracking and faster stopping
-            # We wait BEFORE the action? Or AFTER?
-            # Usually a timer waits then acts.
-            # The previous code acted then waited.
-            # "Make code that sends this post request for every single file... if receiving the command print contracts"
-            # "Our timer makes an API call every X minutes."
-            
-            # Let's wait first, then act. Or act then wait?
-            # "calls the oxygen-bill API every tick"
-            # Usually implies wait -> act -> wait -> act.
-            # But let's stick to the previous logic: Act (maybe initially?) then wait.
-            # The previous logic was: Act, then wait.
-            
-            try:
-                # Call the oxygen bill printer service
-                mothership_service.print_oxygen_bill()
-            except Exception as e:
-                logger.log(f"API Call: Failed - {e}")
+        while not self._stop_event.is_set() and self.is_running:
+            # Phase 1: Wait Loop
+            while time.time() < self.next_trigger_time and not self._stop_event.is_set() and self.is_running:
+                time.sleep(0.5)
 
-            # Wait loop
-            end_wait = time.time() + self.total_seconds
-            while time.time() < end_wait and not self._stop_event.is_set():
-                time.sleep(0.5) # Update frequency
+            if self._stop_event.is_set() or not self.is_running:
+                break
+            
+            # Phase 2: Action Phase
+            self.next_trigger_time = 0
+            
+            if self._task_callback:
+                try:
+                    self._task_callback()
+                except Exception as e:
+                    logger.error(f"Timer Task: Execution failed - {e}")
+            else:
+                logger.warning("Timer Tick: No task callback configured.")
 
-        self.is_running = False
+            if self._stop_event.is_set() or not self.is_running:
+                break
+
+            # Schedule next
+            self.next_trigger_time = time.time() + self.total_seconds
+
         logger.log("Timer loop stopped.")
 
     def start(self, interval=None, api_url=None):
@@ -66,12 +79,23 @@ class ApiWorker:
         if interval:
             try:
                 self.interval = int(interval)
+                self.remaining_on_stop = 0 # Force reset if interval changed
             except ValueError:
                 logger.log(f"Invalid interval format: {interval}")
                 return False
             
         if api_url:
             self.api_url = api_url
+
+        self.total_seconds = self.interval * 60
+        self.is_running = True
+        
+        # Resume or Start New
+        if self.remaining_on_stop > 0:
+            self.next_trigger_time = time.time() + self.remaining_on_stop
+            self.remaining_on_stop = 0
+        else:
+            self.next_trigger_time = time.time() + self.total_seconds
 
         self._stop_event.clear()
         self._thread = threading.Thread(target=self._run_loop, daemon=True)
@@ -83,9 +107,35 @@ class ApiWorker:
             logger.log("Warning: Timer is not running.")
             return False
 
+        # Save current progress
+        self.remaining_on_stop = self.remaining_seconds
+        self.is_running = False
+        self.next_trigger_time = 0
         self._stop_event.set()
         return True
 
 
-# Global instance to be shared between CLI and HTTP Server
-worker = ApiWorker()
+class TimerManager:
+    """Manages multiple named ApiWorker instances."""
+    def __init__(self):
+        self._workers = {}
+
+    def register(self, name: str, interval: int = 20):
+        """Registers a new named worker."""
+        if name not in self._workers:
+            worker = ApiWorker()
+            worker.interval = interval
+            self._workers[name] = worker
+            return worker
+        return self._workers[name]
+
+    def get(self, name: str) -> ApiWorker:
+        """Retrieves a named worker."""
+        return self._workers.get(name)
+
+    def list_names(self) -> list[str]:
+        """Returns all registered timer names."""
+        return list(self._workers.keys())
+
+# Global instance to be shared across the application
+timer_manager = TimerManager()
